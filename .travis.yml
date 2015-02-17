@@ -1,0 +1,41 @@
+# travis
+# -*- coding: utf-8 -*-
+
+## Dependencies:    argparse, mplayer
+## Author:          Gijs Timmers: https://github.com/GijsTimmers
+
+## Licence:         CC-BY-SA-4.0
+##                  http://creativecommons.org/licenses/by-sa/4.0/
+
+## This work is licensed under the Creative Commons
+## Attribution-ShareAlike 4.0 International License. To  view a copy of
+## this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or
+## send a letter to Creative Commons, PO Box 1866, Mountain View,
+## CA 94042, USA.
+
+## Setting up the correct language
+language: python
+python: "2.7"
+
+
+## Command to install system dependencies
+before_install: 
+    - sudo apt-get update -qq
+    - sudo apt-get install pip mplayer
+
+## Command to install pip dependencies
+install: 
+    - pip install argparse
+
+## Actual script
+script: 
+    - ./radio.py --help
+    - ./radio.py --stubru
+    - ./radio.py --538
+    - ./radio.py --3fm
+    - ./radio.py --risefm
+    - ./radio.py --r2nl
+
+## Please don't spam my inbox
+notifications:
+    - email: false
