@@ -16,7 +16,7 @@ You can install pip and mplayer via your package manager:
 
 On Ubuntu:
     
-    sudo apt-get install pip mplayer
+    sudo apt-get install python-pip mplayer
 
 On Arch:
     
