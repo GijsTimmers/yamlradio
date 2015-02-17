@@ -25,3 +25,9 @@ On Arch:
 You can install argparse via `pip`:
 
     sudo pip install argparse
+
+## Adding other radio stations
+There's a dictionary in `radio.py`, called `zenderlijst`. You can edit
+this dictionary to add other radio stations. To have command-line access to
+these radio stations, be sure to add entries to Radio().zenderparser 
+as well.
