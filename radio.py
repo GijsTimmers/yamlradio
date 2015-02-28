@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
+# PYTHON_ARGCOMPLETE_OK
 
 ## Dependencies:    argparse, mplayer
 ## Author:          Gijs Timmers: https://github.com/GijsTimmers
@@ -14,14 +15,24 @@
 ## CA 94042, USA.
 
 import sys                      ## Basislib
+import yaml
 import argparse                 ## Parst argumenten
+import argcomplete              ## Argumenten aanvullen met Tab
 import subprocess               ## Om programma's uit te voeren vanuit Python
 
 class Radio():
     def __init__(self):
+        
+        ## Zenderdictionary aanmaken
+        with open("zenders.yaml", "r") as f:
+            self.zenderdict = yaml.load(f)
+        
         ## Parser instantiëren
         self.parser = argparse.ArgumentParser()
+        self.parser.add_argument('zender', choices=self.zenderdict.keys())
         
+        
+        """
         ## Zorgen dat geen twee zenders tegelijk kunnen worden ingevoerd
         self.zenderparser = self.parser.add_mutually_exclusive_group()
         
@@ -45,34 +56,24 @@ class Radio():
         self.zenderparser.add_argument("--r2nl",
         help="Radio 2 (Nederland)",\
         action="store_const", dest="zender", const="r2nl")
+        """
         
-        
+        ## Argumenten automatisch aanvullen met TAB.
+        argcomplete.autocomplete(self.parser)
         
     def zendervinden(self):
         ## De ingevoerde argumenten parsen
         argumenten = self.parser.parse_args()
-        
-        ## Zenderlijst definiëren; voeg hier extra zenders toe als
-        ## een zender:url-dictionary
-        
-        zenderlijst = {
-        "stubru": "http://mp3.streampower.be/stubru-high.mp3",
-        "538"   : "http://82.201.100.9:8000/radio538",
-        "3fm"   : "http://icecast.omroep.nl/3fm-bb-mp3",
-        "risefm": "http://mastersound.hu/clubfmplay_hq",
-        "r2nl"  : "http://icecast.omroep.nl/radio2-bb-mp3"
-        }
-        
+        #print argumenten.zender
+        #print self.zenderdict[argumenten.zender]
         
         ## Indien er geen opties zijn meegegeven, krijgen we een KeyError.
         ## In dat geval printen we de --help-output.
         try:
-            url = zenderlijst[argumenten.zender]
+            url = self.zenderdict[argumenten.zender]
             return (argumenten.zender, url)
         except KeyError:
             self.parser.parse_args("--help".split())
-        
-        
         
     def afspelen(self, zender, url):
         print "Speelt nu af: " + zender + ". " + \
