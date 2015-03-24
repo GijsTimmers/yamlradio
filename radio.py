@@ -52,7 +52,9 @@ class Radio():
             self.parser.parse_args("--help".split())
         
     def afspelen(self, zender, url):
-        print "Speelt nu af: " + zender + ". " + \
+        ## We encoderen de zendernaam in UTF-8 om errors te voorkomen in de
+        ## stringnaam: "België" zou anders een probleem geven.
+        print "Speelt nu af: " + zender.encode("utf-8") + ". " + \
         "Druk op Q om te beëindigen."
         
         ## dev_null als schrijfbestand definiëren om output te verbergen.
