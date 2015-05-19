@@ -25,7 +25,7 @@ before_install:
 
 ## Command to install pip dependencies
 install: 
-    - pip install argparse pyYAML
+    - pip install argparse argcomplete pyYAML
 
 ## Actual script
 script: 
