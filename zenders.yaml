@@ -5,6 +5,9 @@ r1nl:
 r2nl:
   naam: Radio 2 (Nederland)
   url : http://icecast.omroep.nl/radio2-bb-mp3
+r6nl:
+  naam: Radio 6 (Nederland)
+  url:  http://icecast.omroep.nl/radio6-bb-mp3
 3fm:
   naam: 3FM
   url : http://icecast.omroep.nl/3fm-bb-mp3
