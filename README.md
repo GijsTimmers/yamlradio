@@ -26,6 +26,17 @@ You can install argparse via `pip`:
 
     sudo pip install argparse
 
+## Usage
+
+    ./radio.py <CHANNEL-ABBREVIATION>
+
+e.g.
+
+    ./radio.py r2nl
+    ./radio.py stubru
+
+Music will start playing automatically, press Enter or Q to exit.
+
 ## Adding other radio stations
 There's a YAML file in this repository, called `zenders.yaml`. You can edit
 this file to add other radio stations.
