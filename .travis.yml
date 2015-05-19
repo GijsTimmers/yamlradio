@@ -29,12 +29,11 @@ install:
 
 ## Actual script
 script: 
-    - ./radio.py --help
-    - ./radio.py --stubru
-    - ./radio.py --538
-    - ./radio.py --3fm
-    - ./radio.py --risefm
-    - ./radio.py --r2nl
+    - ./radio.py stubru
+    - ./radio.py 538
+    - ./radio.py 3fm
+    - ./radio.py risefm
+    - ./radio.py r2nl
 
 ## Please don't spam my inbox
 notifications:
