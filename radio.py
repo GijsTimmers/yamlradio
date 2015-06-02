@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
-## Dependencies:    argparse, mplayer
+## Dependencies:    mplayer, argparse, argcomplete, pyYAML
 ## Author:          Gijs Timmers: https://github.com/GijsTimmers
 
 ## Licence:         CC-BY-SA-4.0
