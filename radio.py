@@ -57,9 +57,9 @@ class Radio():
     def afspelen(self, zender, url):
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen in de
         ## stringnaam: "België" zou anders een probleem geven.
-        print ("Speelt nu af: {zender}. "
-               "Druk op Enter om te beëindigen."
-               .format(zender=zender.encode("utf-8")))
+        print "Speelt nu af: {zender}. " \
+              "Druk op Enter om te beëindigen." \
+              .format(zender=zender.encode("utf-8"))
         
         ## dev_null als schrijfbestand definiëren om output te verbergen.
         try:
