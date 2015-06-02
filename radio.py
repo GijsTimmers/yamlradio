@@ -39,40 +39,50 @@ class Radio():
     def zendervinden(self):
         ## De ingevoerde argumenten parsen
         argumenten = self.parser.parse_args()
-        #print argumenten.zender
-        #print self.zenderdict[argumenten.zender]
         
-        ## Indien er geen opties zijn meegegeven, krijgen we een KeyError.
-        ## In dat geval printen we de --help-output.
-        try:
-            naam = self.zenderdict[argumenten.zender]["naam"]
-            url  = self.zenderdict[argumenten.zender]["url"]
-            return (naam, url)
+        naam = self.zenderdict[argumenten.zender]["naam"]
+        url  = self.zenderdict[argumenten.zender]["url"]
+        return (naam, url)
+        
+        """
         except KeyError:
-            self.parser.parse_args("--help".split())
-        
+            print "usage: radio.py ABBREVIATION"
+            print "Supported channels:"
+            lijst = [["Channel", "Abbreviation"]]
+            for afkorting in self.zenderdict.keys():
+                lijst.append([self.zenderdict[a]["naam"], self.zenderdict[a]])
+            print lijst
+            #self.parser.parse_args("--help".split())
+        """
     def afspelen(self, zender, url):
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen in de
         ## stringnaam: "België" zou anders een probleem geven.
-        print "Speelt nu af: " + zender.encode("utf-8") + ". " + \
-        "Druk op Q om te beëindigen."
+        print ("Speelt nu af: {zender}. "
+               "Druk op Enter om te beëindigen."
+               .format(zender=zender.encode("utf-8")))
         
         ## dev_null als schrijfbestand definiëren om output te verbergen.
         try:
-            dev_null = open("/dev/null", "w")
+            dev_null = open(os.devnull, "w")
         except IOError:
             print "Kon /dev/null niet bereiken."
             
-        ## mplayer starten
         try:
-            subprocess.call(["mplayer", url], \
+            ## mplayer starten
+            proces = subprocess.Popen(["mplayer", url], \
             stdout = dev_null, stderr = dev_null)
+            
+            ## mplayer killen na toetsaanslag op Enter
+            raw_input()
+            proces.kill()
+            
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
             
+            
 def main():
     rd = Radio()
-    (naam, url) = rd.zendervinden()
+    naam, url = rd.zendervinden()
     rd.afspelen(naam, url)
     return 0
 
