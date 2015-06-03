@@ -13,7 +13,7 @@ r6nl:
   url : http://icecast.omroep.nl/3fm-bb-mp3
 "538":
   naam: Radio 538
-  url : http://82.201.100.9:8000/radio538
+  url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
 sublimefm:
   naam: Sublime FM
   url:  http://82.201.47.68/SublimeFM2
