@@ -28,7 +28,7 @@ install:
     - pip install argparse argcomplete pyYAML
 
 ## Actual script
-script: ./test.py
+script: ./.test
 
 ## Please don't spam my inbox
 notifications:
