@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/GijsTimmers/radio.svg)](https://travis-ci.org/GijsTimmers/radio)
+
 [![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 
@@ -29,15 +30,15 @@ You can install the other dependencies via `pip`:
 
 ## Usage
 
-    ./radio.py <CHANNEL-ABBREVIATION>
+    ./radio <CHANNEL-ABBREVIATION>
 
 e.g.
 
-    ./radio.py r2nl
-    ./radio.py stubru
+    ./radio r2nl
+    ./radio stubru
 
 Music will start playing automatically, press Enter or Q to exit.
 
 ## Adding other radio stations
-There's a YAML file in this repository, called `zenders.yaml`. You can edit
+There's a YAML file in this repository, called `zenders.yml`. You can edit
 this file to add other radio stations.
