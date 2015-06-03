@@ -14,6 +14,7 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
+################################################################################
 print "Imports testen...",
 try:
     import radio
@@ -21,8 +22,7 @@ try:
 except Exception as e:
     print "ERROR"
     print e.message, e.args
-
-
+################################################################################
 print "Radio() instantiëren...",
 try:
     rd = radio.Radio()
@@ -30,7 +30,7 @@ try:
 except Exception as e:
     print "ERROR"
     print e.message, e.args
-
+################################################################################
 print "Variabelen testen...",
 try:
     rd.parser
@@ -39,3 +39,4 @@ try:
 except Exception as e:
     print "ERROR"
     print e.message, e.args
+################################################################################
