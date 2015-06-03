@@ -32,4 +32,4 @@ script: ./test.py
 
 ## Please don't spam my inbox
 notifications:
-    - email: false
+    email: false
