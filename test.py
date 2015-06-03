@@ -14,6 +14,8 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
+import time
+
 ################################################################################
 print "Imports testen...",
 try:
@@ -35,6 +37,21 @@ print "Variabelen testen...",
 try:
     rd.parser
     rd.zenderdict
+    print "OK"
+except Exception as e:
+    print "ERROR"
+    print e.message, e.args
+################################################################################
+print "Afspeelmechanisme testen..."
+try:
+    for afkorting in rd.zenderdict.keys():
+        #zender = rd.zenderdict[afkorting]["naam"].encode("utf-8")
+        zender = rd.zenderdict[afkorting]["naam"]
+        url = rd.zenderdict[afkorting]["url"]
+        
+        proces = rd.afspelen(zender, url)
+        time.sleep(2)
+        rd.stoppen(proces)
     print "OK"
 except Exception as e:
     print "ERROR"

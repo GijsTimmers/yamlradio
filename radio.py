@@ -43,7 +43,7 @@ class Radio():
         naam = self.zenderdict[argumenten.zender]["naam"]
         url  = self.zenderdict[argumenten.zender]["url"]
         return (naam, url)
-        
+
     def afspelen(self, zender, url):
         try:
             ## dev_null als schrijfbestand definiëren om output te verbergen.
@@ -56,20 +56,24 @@ class Radio():
                 print "Speelt nu af: {zender}. " \
                       "Druk op Enter om te beëindigen." \
                       .format(zender=zender.encode("utf-8"))
-            
-                ## mplayer killen na toetsaanslag op Enter
-                raw_input()
-                proces.kill()
+                
+                return proces
+                
         except IOError:
             print "Kon /dev/null niet bereiken."
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
+    
+    def stoppen(self, proces):
+        proces.kill()
 
 
 def main():
     rd = Radio()
     naam, url = rd.zendervinden()
-    rd.afspelen(naam, url)
+    proces = rd.afspelen(naam, url)
+    raw_input()
+    rd.stoppen(proces)
     return 0
 
 if __name__ == '__main__':
