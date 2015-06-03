@@ -72,10 +72,11 @@ def main():
     rd = Radio()
     naam, url = rd.zendervinden()
     proces = rd.afspelen(naam, url)
+    ## Afspelen stoppen na drukken op ENTER mbv raw_input(): het script kan 
+    ## pas verder na een invoer bij raw_input() en blijft daardoor afspelen.
     raw_input()
     rd.stoppen(proces)
     return 0
 
 if __name__ == '__main__':
     main()
-

@@ -17,7 +17,7 @@
 import time
 
 ################################################################################
-print "Imports testen...",
+print "┌ Imports testen...",
 try:
     import radio
     print "OK"
@@ -25,7 +25,7 @@ except Exception as e:
     print "ERROR"
     print e.message, e.args
 ################################################################################
-print "Radio() instantiëren...",
+print "├ Radio() instantiëren...",
 try:
     rd = radio.Radio()
     print "OK"
@@ -33,7 +33,7 @@ except Exception as e:
     print "ERROR"
     print e.message, e.args
 ################################################################################
-print "Variabelen testen...",
+print "├ Variabelen testen...",
 try:
     rd.parser
     rd.zenderdict
@@ -42,9 +42,10 @@ except Exception as e:
     print "ERROR"
     print e.message, e.args
 ################################################################################
-print "Afspeelmechanisme testen..."
+print "├ Afspeelmechanisme testen..."
 try:
     for afkorting in rd.zenderdict.keys():
+        print "├─",
         #zender = rd.zenderdict[afkorting]["naam"].encode("utf-8")
         zender = rd.zenderdict[afkorting]["naam"]
         url = rd.zenderdict[afkorting]["url"]
@@ -52,8 +53,8 @@ try:
         proces = rd.afspelen(zender, url)
         time.sleep(2)
         rd.stoppen(proces)
-    print "OK"
+    print "└ OK"
 except Exception as e:
-    print "ERROR"
+    print "└ ERROR"
     print e.message, e.args
 ################################################################################
