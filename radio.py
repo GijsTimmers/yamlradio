@@ -14,6 +14,7 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
+import re                       ## Regex
 import os                       ## Basislib
 import sys                      ## Basislib
 import yaml                     ## Configuratie inlezen
@@ -48,7 +49,7 @@ class Radio():
         try:
             ## dev_null als schrijfbestand definiëren om output te verbergen.
             with open(os.devnull, "w") as dev_null:
-                proces = subprocess.Popen(["mplayer", url], \
+                self.stream = subprocess.Popen(["mplayer", url], \
                 stdout = dev_null, stderr = dev_null)
                 
                 ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
@@ -56,26 +57,24 @@ class Radio():
                 print "Speelt nu af: {zender}. " \
                       "Druk op Enter om te beëindigen." \
                       .format(zender=zender.encode("utf-8"))
-                
-                return proces
-                
+                      
         except IOError:
             print "Kon /dev/null niet bereiken."
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
     
-    def stoppen(self, proces):
-        proces.kill()
+    def stoppen(self):
+        self.stream.kill()
 
 
 def main():
     rd = Radio()
     naam, url = rd.zendervinden()
-    proces = rd.afspelen(naam, url)
+    rd.afspelen(naam, url)
     ## Afspelen stoppen na drukken op ENTER mbv raw_input(): het script kan 
     ## pas verder na een invoer bij raw_input() en blijft daardoor afspelen.
     raw_input()
-    rd.stoppen(proces)
+    rd.stoppen()
     return 0
 
 if __name__ == '__main__':
