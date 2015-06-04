@@ -52,7 +52,7 @@ try:
         
         proces = rd.afspelen(zender, url)
         time.sleep(2)
-        rd.stoppen(proces)
+        rd.stoppen()
     print "└ OK"
 except Exception as e:
     print "└ ERROR"
