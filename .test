@@ -15,46 +15,58 @@
 ## CA 94042, USA.
 
 import time
+import threading
+from colorama import Fore, Style
 
-################################################################################
-print "┌ Imports testen...",
+###############################################################################
+def ok():
+    print Style.BRIGHT + Fore.GREEN + "OK" + Fore.RESET + Style.RESET_ALL
+def error():
+    print Style.BRIGHT + Fore.RED + "ERROR" + Fore.RESET + Style.RESET_ALL
+
+###############################################################################
+print "Imports testen...",
 try:
     import radio
-    print "OK"
+    ok()
 except Exception as e:
-    print "ERROR"
+    error()
     print e.message, e.args
-################################################################################
-print "├ Radio() instantiëren...",
+###############################################################################
+print "Radio() instantiëren...",
 try:
     rd = radio.Radio()
-    print "OK"
+    ok()
 except Exception as e:
-    print "ERROR"
+    error()
     print e.message, e.args
-################################################################################
-print "├ Variabelen testen...",
+###############################################################################
+print "Variabelen testen...",
 try:
     rd.parser
     rd.zenderdict
-    print "OK"
+    ok()
 except Exception as e:
-    print "ERROR"
+    error()
     print e.message, e.args
-################################################################################
-print "├ Afspeelmechanisme testen..."
+###############################################################################
+print "Afspeelmechanisme testen..."
 try:
     for afkorting in rd.zenderdict.keys():
-        print "├─",
         #zender = rd.zenderdict[afkorting]["naam"].encode("utf-8")
-        zender = rd.zenderdict[afkorting]["naam"]
-        url = rd.zenderdict[afkorting]["url"]
+        naam = rd.zenderdict[afkorting]["naam"]
+        url  = rd.zenderdict[afkorting]["url"]
         
-        proces = rd.afspelen(zender, url)
+        t = threading.Thread(target=rd.afspelen, args=(naam, url))
+        t.start()
         time.sleep(2)
         rd.stoppen()
-    print "└ OK"
+        t.join()
+        ok()
+        #proces = rd.afspelen(zender, url)
+        #time.sleep(2)
+        #rd.stoppen()
 except Exception as e:
-    print "└ ERROR"
+    error()
     print e.message, e.args
-################################################################################
+###############################################################################

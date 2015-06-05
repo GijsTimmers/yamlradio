@@ -26,6 +26,7 @@ before_install:
 ## Command to install pip dependencies
 install: 
     - pip install argparse argcomplete pyYAML
+    - pip install colorama ## enkel ndz voor testen
 
 ## Actual script
 script: ./.test
