@@ -38,7 +38,12 @@ e.g.
     ./radio r2nl
     ./radio stubru
 
-Music will start playing automatically, press Enter or Q to exit.
+Music will start playing automatically, press any of the following keys to exit:
+
+- <kbd>Enter</kbd>
+- <kbd>q</kbd>
+- <kbd>Esc</kbd>
+- <kbd>Ctrl</kbd> + <kbd>c</kbd>
 
 ## Adding other radio stations
 There's a YAML file in this repository, called `zenders.yml`. You can edit
