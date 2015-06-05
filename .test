@@ -52,7 +52,7 @@ except Exception as e:
 ###############################################################################
 print "Afspeelmechanisme testen..."
 try:
-    for afkorting in rd.zenderdict.keys():
+    for afkorting in sorted(rd.zenderdict.keys()):
         #zender = rd.zenderdict[afkorting]["naam"].encode("utf-8")
         naam = rd.zenderdict[afkorting]["naam"]
         url  = rd.zenderdict[afkorting]["url"]

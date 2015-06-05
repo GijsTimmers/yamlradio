@@ -12,6 +12,7 @@ A small Python script to play various radio stations from a terminal.
 - `argparse`
 - `argcomplete`
 - `pyYAML`
+- `py-getch`
 
 
 You can install pip and mplayer via your package manager:
@@ -26,7 +27,7 @@ On Arch:
     
 You can install the other dependencies via `pip`:
 
-    sudo pip install argparse argcomplete pyYAML 
+    sudo pip install argparse argcomplete pyYAML py-getch
 
 ## Usage
 

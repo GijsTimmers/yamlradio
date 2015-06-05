@@ -16,12 +16,16 @@
 
 import os                       ## Basislib
 import yaml                     ## Configuratie inlezen
+import time                     ## Polling voor opvangen keypress
 import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
+import getch.getch              ## Toetsaanslagen opvangen
 import argcomplete              ## Argumenten aanvullen met Tab
 import argparse                 ## Parst argumenten
 import sys                      ## Basislib
 import re                       ## Regex
+
+
 
 class Cursor():
     def __init__(self):
@@ -117,6 +121,8 @@ class Radio():
                     oudeInfo = nieuweInfo
                     
             if re.match("^Exiting...", regel):
+                ## Op een nieuwe regel starten
+                sys.stdout.write("\n")
                 break
         return()
         
@@ -137,7 +143,8 @@ class Radio():
         except IOError:
             pass
         
-
+def getkeypress():
+    return getch.getch.getch()
 
 def main():
     cu = Cursor()
@@ -147,17 +154,13 @@ def main():
     t = threading.Thread(target=rd.afspelen, args=(naam, url))
     t.start()
     
-    ## Afspelen stoppen na drukken op ENTER mbv raw_input(): het script kan 
-    ## pas verder na een invoer bij raw_input() en blijft daardoor afspelen.
-    try:
-        raw_input()
-        cu.tonen()
-        rd.stoppen()
-        t.join()
-    except KeyboardInterrupt:
-        cu.tonen()
-        print "\nAfsluiten kan ook met Enter."
-        
+    ## Afspelen stoppen na drukken op ENTER, C-c, q of Esc
+    while getkeypress() not in ["\r", "q", "\x03", "\x1b"]:
+        time.sleep(0.2)
+    cu.tonen()
+    rd.stoppen()
+    t.join()
+    
     return 0
 
 if __name__ == '__main__':
