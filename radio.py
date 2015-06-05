@@ -14,15 +14,47 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import re                       ## Regex
 import os                       ## Basislib
-import sys                      ## Basislib
 import yaml                     ## Configuratie inlezen
-import time
-import threading
-import argparse                 ## Parst argumenten
-import argcomplete              ## Argumenten aanvullen met Tab
+import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
+import argcomplete              ## Argumenten aanvullen met Tab
+import argparse                 ## Parst argumenten
+import sys                      ## Basislib
+import re                       ## Regex
+
+class Cursor():
+    def __init__(self):
+        if os.name == 'nt':
+            import msvcrt
+            import ctypes
+
+            class _CursorInfo(ctypes.Structure):
+                _fields_ = [("size", ctypes.c_int),
+                            ("visible", ctypes.c_byte)]
+
+        
+    def verbergen(self):
+        if os.name == 'nt':
+            ci = _CursorInfo()
+            handle = ctypes.windll.kernel32.GetStdHandle(-11)
+            ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+            ci.visible = False
+            ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+        elif os.name == 'posix':
+            sys.stdout.write("\033[?25l")
+            sys.stdout.flush()
+
+    def tonen(self):
+        if os.name == 'nt':
+            ci = _CursorInfo()
+            handle = ctypes.windll.kernel32.GetStdHandle(-11)
+            ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+            ci.visible = True
+            ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+        elif os.name == 'posix':
+            sys.stdout.write("\033[?25h")
+            sys.stdout.flush()
 
 class Radio():
     def __init__(self):
@@ -30,6 +62,8 @@ class Radio():
         with open(os.path.join(os.path.dirname(__file__), 
         "zenders.yml"), "r") as f:
             self.zenderdict = yaml.load(f)
+        
+        self.lock = threading.Lock()
         
         ## Parser instantiëren
         self.parser = argparse.ArgumentParser()
@@ -54,36 +88,39 @@ class Radio():
             stdout=subprocess.PIPE, \
             stderr=subprocess.STDOUT, \
             bufsize=1, \
-            universal_newlines=True)
-            
-            ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
-            ## in de stringnaam: "België" zou anders een probleem geven.
-            print "Speelt nu af: [{zender}]" \
-                  .format(zender=zender.encode("utf-8"))
-            
-            for regel in iter(self.stream.stdout.readline, ''):
-                ## Per nieuwe entry in stdout.readline wordt door deze loop
-                ## gegaan. Als bijvoorbeeld de ICY-info verandert, wordt er
-                ## opnieuw geprint: ICY Info: ... Dat wordt opgepakt door de if,
-                ## en geprint. Zo hebben we iedere keer de meest recente
-                ## info te pakken. Het oudeInfo/nieuweInfo-mechanisme is een
-                ## mechanisme om iedere keer alleen het nieuwste ICY-bericht
-                ## in het leesvenster te plaatsen.
-                
-                oudeInfo = ""
-                if re.match("^ICY", regel):
-                    nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*(?=';)", regel)[0]
-                    if nieuweInfo != oudeInfo:
-                        sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-                        sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
-                        oudeInfo = nieuweInfo
-                        
-                if re.match("^Exiting...", regel):
-                    break
-            return()
-            
+            universal_newlines=True, \
+            close_fds=True)
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
+            sys.exit() ## Moet nog aan gewerkt worden
+            
+        ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
+        ## in de stringnaam: "België" zou anders een probleem geven.
+        print "Speelt nu af: [{zender}]" \
+              .format(zender=zender.encode("utf-8"))
+        
+        for regel in iter(self.stream.stdout.readline, ''):
+            ## Per nieuwe entry in stdout.readline wordt door deze loop
+            ## gegaan. Als bijvoorbeeld de ICY-info verandert, wordt er
+            ## opnieuw geprint: ICY Info: ... Dat wordt opgepakt door de if,
+            ## en geprint. Zo hebben we iedere keer de meest recente
+            ## info te pakken. Het oudeInfo/nieuweInfo-mechanisme is een
+            ## mechanisme om iedere keer alleen het nieuwste ICY-bericht
+            ## in het leesvenster te plaatsen.
+            
+            oudeInfo = ""
+            if re.match("^ICY", regel):
+                nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*(?=';)", regel)[0]
+                if nieuweInfo != oudeInfo:
+                    sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+                    sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
+                    oudeInfo = nieuweInfo
+                    
+            if re.match("^Exiting...", regel):
+                break
+        return()
+        
+        
         
     def stoppen(self):
         ## Stuur de toetsindruk Q naar de stream. mplayer reageert op q
@@ -91,11 +128,20 @@ class Radio():
         ## de thread t loopt een for-loop, welke deze string opvangt. Als 
         ## reactie stopt de for-loop ('break'), en komen we aan bij het
         ## return()-statenment. De thread is nu beëindigd.
-        self.stream.communicate(input="q")
+        try:
+            self.stream.communicate(input="q")
+        
+        ## IOError ontstaat soms door een deadlock in subprocess. Ik weet niet
+        ## precies hoe ik die moet oplossen, daarom vang ik hem gewoon op 
+        ## zonder er iets mee te doen.
+        except IOError:
+            pass
         
 
 
 def main():
+    cu = Cursor()
+    cu.verbergen()
     rd = Radio()
     naam, url = rd.zendervinden()
     t = threading.Thread(target=rd.afspelen, args=(naam, url))
@@ -105,9 +151,11 @@ def main():
     ## pas verder na een invoer bij raw_input() en blijft daardoor afspelen.
     try:
         raw_input()
+        cu.tonen()
         rd.stoppen()
         t.join()
     except KeyboardInterrupt:
+        cu.tonen()
         print "\nAfsluiten kan ook met Enter."
         
     return 0
