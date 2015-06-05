@@ -1,3 +1,10 @@
+## zenders.yaml: contains channels to be used with radio.py.
+
+## Note that channel abbreviations are susceptible to change. For example,
+## if a channel called "sublimefm" would be created in Belgium, it's likely
+## that the current "sublimefm" abbreviation will be renamed to "sublimefmnl",
+## to prevent confusion with the Belgian "sublimefmbe".
+
 ## Nederland
 r1nl:
   naam: Radio 1 (Nederland)

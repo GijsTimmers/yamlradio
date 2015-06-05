@@ -35,7 +35,7 @@ class Radio():
         self.parser = argparse.ArgumentParser()
         self.parser.add_argument('zender', choices=self.zenderdict.keys())
         
-                
+        self.BREEDTE_TERMINAL = 80
         ## Argumenten automatisch aanvullen met TAB.
         argcomplete.autocomplete(self.parser)
         
@@ -58,8 +58,7 @@ class Radio():
             
             ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
             ## in de stringnaam: "België" zou anders een probleem geven.
-            print "Speelt nu af: {zender}. " \
-                  "Druk op Enter om te beëindigen." \
+            print "Speelt nu af: [{zender}]" \
                   .format(zender=zender.encode("utf-8"))
             
             for regel in iter(self.stream.stdout.readline, ''):
@@ -67,11 +66,18 @@ class Radio():
                 ## gegaan. Als bijvoorbeeld de ICY-info verandert, wordt er
                 ## opnieuw geprint: ICY Info: ... Dat wordt opgepakt door de if,
                 ## en geprint. Zo hebben we iedere keer de meest recente
-                ## info te pakken.
+                ## info te pakken. Het oudeInfo/nieuweInfo-mechanisme is een
+                ## mechanisme om iedere keer alleen het nieuwste ICY-bericht
+                ## in het leesvenster te plaatsen.
+                
+                oudeInfo = ""
                 if re.match("^ICY", regel):
-                    info = re.findall("(?<=ICY Info: StreamTitle=').*(?=';)", regel)[0]
-                    print "Info: [{info}]".format(info=info)
-                    pass
+                    nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*(?=';)", regel)[0]
+                    if nieuweInfo != oudeInfo:
+                        sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+                        sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
+                        oudeInfo = nieuweInfo
+                        
                 if re.match("^Exiting...", regel):
                     break
             return()
