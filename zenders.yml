@@ -1,4 +1,4 @@
-## zenders.yaml: contains channels to be used with radio.py.
+## zenders.yml: contains channels to be used with radio.py.
 
 ## Note that channel abbreviations are susceptible to change. For example,
 ## if a channel called "sublimefm" would be created in Belgium, it's likely
@@ -7,33 +7,36 @@
 
 ## Nederland
 r1nl:
-  naam: Radio 1 (Nederland)
-  url:  http://icecast.omroep.nl/radio1-bb-mp3
+    naam: Radio 1 (Nederland)
+    url : http://icecast.omroep.nl/radio1-bb-mp3
 r2nl:
-  naam: Radio 2 (Nederland)
-  url : http://icecast.omroep.nl/radio2-bb-mp3
+    naam: Radio 2 (Nederland)
+    url : http://icecast.omroep.nl/radio2-bb-mp3
 r6nl:
-  naam: Radio 6 (Nederland)
-  url:  http://icecast.omroep.nl/radio6-bb-mp3
+    naam: Radio 6 (Nederland)
+    url : http://icecast.omroep.nl/radio6-bb-mp3
 3fm:
-  naam: 3FM
-  url : http://icecast.omroep.nl/3fm-bb-mp3
+    naam: 3FM
+    url : http://icecast.omroep.nl/3fm-bb-mp3
 "538":
-  naam: Radio 538
-  url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
+    naam: Radio 538
+    url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
+slamfm:
+    naam: Slam FM
+    url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
 sublimefm:
-  naam: Sublime FM
-  url:  http://82.201.47.68/SublimeFM2
+    naam: Sublime FM
+    url : http://82.201.47.68/SublimeFM2
 
 ## België
 r1be:
-  naam: Radio 1 (België)
-  url:  http://mp3.streampower.be/radio1-high
+    naam: Radio 1 (België)
+    url : http://mp3.streampower.be/radio1-high
 stubru:
-  naam: Studio Brussel
-  url : http://mp3.streampower.be/stubru-high.mp3
+    naam: Studio Brussel
+    url : http://mp3.streampower.be/stubru-high.mp3
 
 ## Hongarije
 risefm:
-  naam: RiseFM
-  url : http://mastersound.hu/clubfmplay_hq
+    naam: RiseFM
+    url : http://mastersound.hu/clubfmplay_hq
