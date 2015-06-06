@@ -150,7 +150,7 @@ class Keypress():
         KEY_CTRL_C = "\x03"
         KEY_ESC    = "\x1b"
         
-        self.EXITKEYS = (KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC)
+        self.EXITKEYS = set([KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC])
         
     def getexitkeypress(self):
         keypress = getch.getch.getch()
