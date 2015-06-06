@@ -19,7 +19,7 @@ import yaml                     ## Configuratie inlezen
 import time                     ## Polling voor opvangen keypress
 import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
-import getch.getch              ## Toetsaanslagen opvangen
+import getch                    ## Toetsaanslagen opvangen
 import argcomplete              ## Argumenten aanvullen met Tab
 import argparse                 ## Parst argumenten
 import sys                      ## Basislib
@@ -59,6 +59,22 @@ class Cursor():
         elif os.name == 'posix':
             sys.stdout.write("\033[?25h")
             sys.stdout.flush()
+
+class Keypress():
+    def __init__(self):
+        KEY_ENTER  = "\r"
+        KEY_Q      = "q"
+        KEY_CTRL_C = "\x03"
+        KEY_ESC    = "\x1b"
+        
+        self.EXITKEYS = set([KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC])
+        
+    def getexitkeypress(self):
+        keypress = getch.getch()
+        if keypress in self.EXITKEYS:
+            return True
+        else:
+            return False 
 
 class Radio():
     def __init__(self):
@@ -119,6 +135,10 @@ class Radio():
                     sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
                     sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
                     oudeInfo = nieuweInfo
+            #else:
+                #sys.stdout.write("\rInfo:         [Geen info beschikbaar]")
+                #sys.stdout.flush()
+                
                     
             if re.match("^Exiting...", regel):
                 ## Op een nieuwe regel starten
@@ -143,21 +163,7 @@ class Radio():
         except IOError:
             sys.stdout.write("\n")
 
-class Keypress():
-    def __init__(self):
-        KEY_ENTER  = "\r"
-        KEY_Q      = "q"
-        KEY_CTRL_C = "\x03"
-        KEY_ESC    = "\x1b"
-        
-        self.EXITKEYS = set([KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC])
-        
-    def getexitkeypress(self):
-        keypress = getch.getch.getch()
-        if keypress in self.EXITKEYS:
-            return True
-        else:
-            return False 
+
 
 def main():
     cu = Cursor()
