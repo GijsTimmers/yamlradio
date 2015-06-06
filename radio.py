@@ -141,10 +141,23 @@ class Radio():
         ## precies hoe ik die moet oplossen, daarom vang ik hem gewoon op 
         ## zonder er iets mee te doen.
         except IOError:
-            pass
+            sys.stdout.write("\n")
+
+class Keypress():
+    def __init__(self):
+        KEY_ENTER  = "\r"
+        KEY_Q      = "q"
+        KEY_CTRL_C = "\x03"
+        KEY_ESC    = "\x1b"
         
-def getkeypress():
-    return getch.getch.getch()
+        self.EXITKEYS = (KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC)
+        
+    def getexitkeypress(self):
+        keypress = getch.getch.getch()
+        if keypress in self.EXITKEYS:
+            return True
+        else:
+            return False 
 
 def main():
     cu = Cursor()
@@ -155,7 +168,9 @@ def main():
     t.start()
     
     ## Afspelen stoppen na drukken op ENTER, C-c, q of Esc
-    while getkeypress() not in ["\r", "q", "\x03", "\x1b"]:
+    
+    kp = Keypress()
+    while kp.getexitkeypress() == False:
         time.sleep(0.2)
     cu.tonen()
     rd.stoppen()
