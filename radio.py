@@ -20,12 +20,29 @@ import time                     ## Polling voor opvangen keypress
 import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
 import getch                    ## Toetsaanslagen opvangen
-import argcomplete              ## Argumenten aanvullen met Tab
 import argparse                 ## Parst argumenten
 import sys                      ## Basislib
 import re                       ## Regex
 
-
+class Parser():
+    def __init__(self):
+        ## Zenderdictionary aanmaken
+        with open(os.path.join(os.path.dirname(__file__), 
+        "zenders.yml"), "r") as f:
+            self.zenderdict = yaml.load(f)
+        
+        ## Parser instantiëren en de te verwachten argumenten meegeven
+        self.parser = argparse.ArgumentParser()
+        self.parser.add_argument('zender', choices=self.zenderdict.keys())
+        
+        
+    def zendervinden(self):
+        ## De ingevoerde argumenten parsen
+        argumenten = self.parser.parse_args()
+                        
+        naam = self.zenderdict[argumenten.zender]["naam"]
+        url  = self.zenderdict[argumenten.zender]["url"]
+        return (naam, url)
 
 class Cursor():
     def __init__(self):
@@ -78,28 +95,7 @@ class Keypress():
 
 class Radio():
     def __init__(self):
-        ## Zenderdictionary aanmaken
-        with open(os.path.join(os.path.dirname(__file__), 
-        "zenders.yml"), "r") as f:
-            self.zenderdict = yaml.load(f)
-        
-        self.lock = threading.Lock()
-        
-        ## Parser instantiëren
-        self.parser = argparse.ArgumentParser()
-        self.parser.add_argument('zender', choices=self.zenderdict.keys())
-        
-        self.BREEDTE_TERMINAL = 80
-        ## Argumenten automatisch aanvullen met TAB.
-        argcomplete.autocomplete(self.parser)
-        
-    def zendervinden(self):
-        ## De ingevoerde argumenten parsen
-        argumenten = self.parser.parse_args()
-        
-        naam = self.zenderdict[argumenten.zender]["naam"]
-        url  = self.zenderdict[argumenten.zender]["url"]
-        return (naam, url)
+        self.BREEDTE_TERMINAL = 80    
 
     def afspelen(self, zender, url):
         try:        
@@ -163,25 +159,25 @@ class Radio():
         except IOError:
             sys.stdout.write("\n")
 
-
-
 def main():
+    pa = Parser()
+    naam, url = pa.zendervinden()
+    
     cu = Cursor()
     cu.verbergen()
+    
     rd = Radio()
-    naam, url = rd.zendervinden()
     t = threading.Thread(target=rd.afspelen, args=(naam, url))
     t.start()
     
-    ## Afspelen stoppen na drukken op ENTER, C-c, q of Esc
-    
+    ## Afspelen stoppen na drukken op één van de EXITKEYS
     kp = Keypress()
     while kp.getexitkeypress() == False:
         time.sleep(0.2)
+    
     cu.tonen()
     rd.stoppen()
-    t.join()
-    
+        
     return 0
 
 if __name__ == '__main__':
