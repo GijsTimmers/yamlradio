@@ -17,6 +17,7 @@
 import os                       ## Basislib
 import yaml                     ## Configuratie inlezen
 import time                     ## Polling voor opvangen keypress
+import cursor                   ## Cursor tonen/verbergen
 import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
 import getch                    ## Toetsaanslagen opvangen
@@ -43,39 +44,6 @@ class Parser():
         naam = self.zenderdict[argumenten.zender]["naam"]
         url  = self.zenderdict[argumenten.zender]["url"]
         return (naam, url)
-
-class Cursor():
-    def __init__(self):
-        if os.name == 'nt':
-            import msvcrt
-            import ctypes
-
-            class _CursorInfo(ctypes.Structure):
-                _fields_ = [("size", ctypes.c_int),
-                            ("visible", ctypes.c_byte)]
-
-        
-    def verbergen(self):
-        if os.name == 'nt':
-            ci = _CursorInfo()
-            handle = ctypes.windll.kernel32.GetStdHandle(-11)
-            ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
-            ci.visible = False
-            ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
-        elif os.name == 'posix':
-            sys.stdout.write("\033[?25l")
-            sys.stdout.flush()
-
-    def tonen(self):
-        if os.name == 'nt':
-            ci = _CursorInfo()
-            handle = ctypes.windll.kernel32.GetStdHandle(-11)
-            ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
-            ci.visible = True
-            ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
-        elif os.name == 'posix':
-            sys.stdout.write("\033[?25h")
-            sys.stdout.flush()
 
 class Keypress():
     def __init__(self):
@@ -163,8 +131,7 @@ def main():
     pa = Parser()
     naam, url = pa.zendervinden()
     
-    cu = Cursor()
-    cu.verbergen()
+    cursor.hide()
     
     rd = Radio()
     t = threading.Thread(target=rd.afspelen, args=(naam, url))
@@ -175,7 +142,7 @@ def main():
     while kp.getexitkeypress() == False:
         time.sleep(0.2)
     
-    cu.tonen()
+    cursor.show()
     rd.stoppen()
         
     return 0
