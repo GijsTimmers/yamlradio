@@ -17,7 +17,6 @@
 language: python
 python: "2.7"
 
-
 ## Command to install system dependencies
 before_install: 
     - sudo apt-get update -qq
@@ -25,7 +24,7 @@ before_install:
 
 ## Command to install pip dependencies
 install: 
-    - pip install argparse pyYAML py-getch
+    - pip install argparse pyYAML py-getch cursor
     - pip install colorama ## enkel ndz voor testen
 
 ## Actual script

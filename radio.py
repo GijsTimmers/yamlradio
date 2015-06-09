@@ -16,12 +16,12 @@
 
 import os                       ## Basislib
 import yaml                     ## Configuratie inlezen
-import time                     ## Polling voor opvangen keypress
 import cursor                   ## Cursor tonen/verbergen
 import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
-import getch                    ## Toetsaanslagen opvangen
 import argparse                 ## Parst argumenten
+import getch                    ## Toetsaanslagen opvangen
+import time                     ## Polling voor opvangen keypress
 import sys                      ## Basislib
 import re                       ## Regex
 
