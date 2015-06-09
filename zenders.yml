@@ -5,6 +5,13 @@
 ## that the current "sublimefm" abbreviation will be renamed to "sublimefmnl",
 ## to prevent confusion with the Belgian "sublimefmbe".
 
+## Please add entries like this:
+##
+## channel-abbreviation:
+##     naam: Full Radio Station Name      ## Necessary
+##     url:  http://url-to-radio-stream   ## Necessary
+##     comm: ./path/to/communicator.py    ## Optional
+
 ## Nederland
 r1nl:
     naam: Radio 1 (Nederland)
