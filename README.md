@@ -14,6 +14,7 @@ Dependencies:
 - `argparse`
 - `pyYAML`
 - `py-getch`
+- `cursor`
 
 
 You can install pip and mplayer via your package manager:
@@ -28,7 +29,7 @@ On Arch:
     
 You can install the other dependencies via `pip`:
 
-    sudo pip install argparse pyYAML py-getch
+    sudo pip install argparse pyYAML py-getch cursor
 
 ## Usage
 
