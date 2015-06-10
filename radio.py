@@ -34,15 +34,21 @@ class Parser():
         
         ## Parser instantiëren en de te verwachten argumenten meegeven
         self.parser = argparse.ArgumentParser()
-        self.parser.add_argument('zender', choices=self.zenderdict.keys())
+        
+        ## Afkortingenlijst vullen met afkortingen
+        afkortingenlijst = [combinatie["afk"] for combinatie \
+        in self.zenderdict]
+        self.parser.add_argument('zender', choices=afkortingenlijst)
         
         
     def zendervinden(self):
         ## De ingevoerde argumenten parsen
         argumenten = self.parser.parse_args()
-                        
-        naam = self.zenderdict[argumenten.zender]["naam"]
-        url  = self.zenderdict[argumenten.zender]["url"]
+        
+        for combinatie in self.zenderdict:
+            if combinatie["afk"] == argumenten.zender:
+                naam = combinatie["naam"]
+                url  = combinatie["url"]
         return (naam, url)
 
 class Keypress():

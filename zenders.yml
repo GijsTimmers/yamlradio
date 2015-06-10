@@ -7,43 +7,51 @@
 
 ## Please add entries like this:
 ##
-## channel-abbreviation:
-##     naam: Full Radio Station Name      ## Necessary
-##     url:  http://url-to-radio-stream   ## Necessary
-##     comm: ./path/to/communicator.py    ## Optional
+## - afk: channel-abbreviation
+##   naam: Full Radio Station Name      ## Necessary
+##   url:  http://url-to-radio-stream   ## Necessary
+##   comm: ./path/to/communicator.py    ## Optional
 
 ## Nederland
-r1nl:
-    naam: Radio 1 (Nederland)
-    url : http://icecast.omroep.nl/radio1-bb-mp3
-r2nl:
-    naam: Radio 2 (Nederland)
-    url : http://icecast.omroep.nl/radio2-bb-mp3
-r6nl:
-    naam: Radio 6 (Nederland)
-    url : http://icecast.omroep.nl/radio6-bb-mp3
-3fm:
-    naam: 3FM
-    url : http://icecast.omroep.nl/3fm-bb-mp3
-"538":
-    naam: Radio 538
-    url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
-slamfm:
-    naam: Slam FM
-    url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
-sublimefm:
-    naam: Sublime FM
-    url : http://82.201.47.68/SublimeFM2
+- afk:  r1nl
+  naam: Radio 1 (Nederland)
+  url : http://icecast.omroep.nl/radio1-bb-mp3
+
+- afk:  r2nl
+  naam: Radio 2 (Nederland)
+  url : http://icecast.omroep.nl/radio2-bb-mp3
+
+- afk:  r6nl
+  naam: Radio 6 (Nederland)
+  url : http://icecast.omroep.nl/radio6-bb-mp3
+
+- afk:  3fm
+  naam: 3FM
+  url : http://icecast.omroep.nl/3fm-bb-mp3
+
+- afk:  "538"
+  naam: Radio 538
+  url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
+
+- afk:  slamfm
+  naam: Slam FM
+  url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
+  
+  
+- afk:  sublimefm
+  naam: Sublime FM
+  url : http://82.201.47.68/SublimeFM2
 
 ## België
-r1be:
-    naam: Radio 1 (België)
-    url : http://mp3.streampower.be/radio1-high
-stubru:
-    naam: Studio Brussel
-    url : http://mp3.streampower.be/stubru-high.mp3
+- afk:  r1be
+  naam: Radio 1 (België)
+  url : http://mp3.streampower.be/radio1-high
+  
+- afk:  stubru
+  naam: Studio Brussel
+  url : http://mp3.streampower.be/stubru-high.mp3
 
 ## Hongarije
-risefm:
-    naam: RiseFM
-    url : http://mastersound.hu/clubfmplay_hq
+- afk:  risefm
+  naam: RiseFM
+  url : http://mastersound.hu/clubfmplay_hq
