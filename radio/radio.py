@@ -82,6 +82,9 @@ class Radio():
             close_fds=True)
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
+            print "Installeer deze eerst:"
+            print "Ubuntu: sudo apt-get install mplayer"
+            print "Arch:   sudo pacman -S mplayer"
             sys.exit() ## Moet nog aan gewerkt worden
             
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen

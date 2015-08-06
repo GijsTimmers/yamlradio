@@ -33,11 +33,14 @@
   naam: Radio 538
   url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
 
+- afk:  pinguin
+  naam: Pinguin Radio
+  url:  http://pr320.pinguinradio.com:80/
+
 - afk:  slamfm
   naam: Slam FM
   url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
-  
-  
+    
 - afk:  sublimefm
   naam: Sublime FM
   url : http://82.201.47.68/SublimeFM2
@@ -50,6 +53,10 @@
 - afk:  stubru
   naam: Studio Brussel
   url : http://mp3.streampower.be/stubru-high.mp3
+
+- afk:  scorpio
+  naam: Radio Scorpio 
+  url:  http://193.190.253.57:8000/stream
 
 ## Hongarije
 - afk:  risefm
