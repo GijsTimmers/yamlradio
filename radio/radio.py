@@ -89,8 +89,13 @@ class Radio():
             
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
         ## in de stringnaam: "België" zou anders een probleem geven.
-        print "Speelt nu af: [{zender}]" \
+        print "Speelt nu af: [{zender}]"\
               .format(zender=zender.encode("utf-8"))
+              
+        ## Huidige radiozender weergeven als terminaltitel.
+        sys.stdout.write("\x1b]2;{zender}\x07"\
+                         .format(zender=zender.encode("utf-8")))
+        
         
         for regel in iter(self.stream.stdout.readline, ''):
             ## Per nieuwe entry in stdout.readline wordt door deze loop
@@ -122,6 +127,9 @@ class Radio():
         
         
     def stoppen(self):
+        ## Terminaltitel opnieuw instellen op "Terminal"
+        sys.stdout.write("\x1b]2;Terminal\x07")
+        
         ## Stuur de toetsindruk Q naar de stream. mplayer reageert op q
         ## door te stoppen. Bij het stoppen print mplayer "Exiting...". In
         ## de thread t loopt een for-loop, welke deze string opvangt. Als 
