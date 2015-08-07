@@ -69,11 +69,15 @@ class Keypress():
 
 class Radio():
     def __init__(self):
-        self.BREEDTE_TERMINAL = 80    
+        self.BREEDTE_TERMINAL = 80
+        if os.name == "posix":
+            self.cmd = "mplayer"
+        else:
+            self.cmd = "mplayer.exe"
 
     def afspelen(self, zender, url):
         try:        
-            self.stream = subprocess.Popen(["mplayer", url], \
+            self.stream = subprocess.Popen([self.cmd, url], \
             stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, \
             stderr=subprocess.STDOUT, \
@@ -83,8 +87,9 @@ class Radio():
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
             print "Installeer deze eerst:"
-            print "Ubuntu: sudo apt-get install mplayer"
-            print "Arch:   sudo pacman -S mplayer"
+            print "Ubuntu:  sudo apt-get install mplayer"
+            print "Arch:    sudo pacman -S mplayer"
+            print "Windows: http://sourceforge.net/projects/mplayer-win32/"
             sys.exit() ## Moet nog aan gewerkt worden
             
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
@@ -120,7 +125,7 @@ class Radio():
                 ## string weg te nemen.
                 nieuweInfo = re.findall(
                 "(?<=ICY Info: StreamTitle=').*?(?=';)", regel
-                                        )[0].strip()
+                                        )[0].strip()[:64]
                 if nieuweInfo != oudeInfo:
                     sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
                     sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
