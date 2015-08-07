@@ -118,7 +118,9 @@ class Radio():
                 ## niet wordt opgenomen in de nieuweInfo. Uiteindelijk nog een
                 ## strip()-statement om losse spaties voorin en achterin de
                 ## string weg te nemen.
-                nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*?(?=';)", regel)[0].strip()
+                nieuweInfo = re.findall(
+                "(?<=ICY Info: StreamTitle=').*?(?=';)", regel
+                                        )[0].strip()
                 if nieuweInfo != oudeInfo:
                     sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
                     sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))

@@ -27,7 +27,7 @@ def error():
 ###############################################################################
 print "Imports testen...",
 try:
-    import radio
+    from radio import radio
     ok()
 except Exception as e:
     error()
@@ -43,8 +43,7 @@ except Exception as e:
 ###############################################################################
 print "Variabelen testen...",
 try:
-    rd.parser
-    rd.zenderdict
+    pa = radio.Parser()
     ok()
 except Exception as e:
     error()
@@ -52,20 +51,20 @@ except Exception as e:
 ###############################################################################
 print "Afspeelmechanisme testen..."
 try:
-    for afkorting in sorted(rd.zenderdict.keys()):
-        #zender = rd.zenderdict[afkorting]["naam"].encode("utf-8")
-        naam = rd.zenderdict[afkorting]["naam"]
-        url  = rd.zenderdict[afkorting]["url"]
+    afkortingenlijst = [combinatie["afk"] for combinatie \
+    in pa.zenderdict]
+        
+    for combinatie in pa.zenderdict:
+        naam = combinatie["naam"]
+        url  = combinatie["url"]
         
         t = threading.Thread(target=rd.afspelen, args=(naam, url))
         t.start()
-        time.sleep(2)
+        time.sleep(3)
         rd.stoppen()
         t.join()
         ok()
-        #proces = rd.afspelen(zender, url)
-        #time.sleep(2)
-        #rd.stoppen()
+        
 except Exception as e:
     error()
     print e.message, e.args
