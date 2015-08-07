@@ -108,7 +108,17 @@ class Radio():
             
             oudeInfo = ""
             if re.match("^ICY", regel):
-                nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*?(?=';)", regel)[0]
+                ## Wat uitleg over de regex:
+                ## Alles tussen
+                ## ICY Info: StreamTitle='
+                ## en
+                ## ';
+                ## wordt opgeslagen als nieuweInfo. .* is non-greedy gemaakt
+                ## met een vraagteken, zodat een eventueel volgende streamUrl
+                ## niet wordt opgenomen in de nieuweInfo. Uiteindelijk nog een
+                ## strip()-statement om losse spaties voorin en achterin de
+                ## string weg te nemen.
+                nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*?(?=';)", regel)[0].strip()
                 if nieuweInfo != oudeInfo:
                     sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
                     sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
