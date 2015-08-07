@@ -108,7 +108,7 @@ class Radio():
             
             oudeInfo = ""
             if re.match("^ICY", regel):
-                nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*(?=';)", regel)[0]
+                nieuweInfo = re.findall("(?<=ICY Info: StreamTitle=').*?(?=';)", regel)[0]
                 if nieuweInfo != oudeInfo:
                     sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
                     sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
