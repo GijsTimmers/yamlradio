@@ -82,8 +82,8 @@ class Radio():
             stdout=subprocess.PIPE, \
             stderr=subprocess.STDOUT, \
             bufsize=1, \
-            universal_newlines=True, \
-            close_fds=True)
+            universal_newlines=True)
+            
         except OSError:
             print "Kon geen mplayer-executable vinden in $PATH."
             print "Installeer deze eerst:"
