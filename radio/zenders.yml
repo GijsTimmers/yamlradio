@@ -49,6 +49,10 @@
 - afk:  r1be
   naam: Radio 1 (België)
   url : http://mp3.streampower.be/radio1-high
+
+- afk:  humorzender
+  naam: Humorzender - Vlaanderen Lacht
+  url:  http://streaming.radionomy.com/humorzender
   
 - afk:  stubru
   naam: Studio Brussel
