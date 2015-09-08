@@ -10,9 +10,25 @@
 ## - afk: channel-abbreviation
 ##   naam: Full Radio Station Name      ## Necessary
 ##   url:  http://url-to-radio-stream   ## Necessary
-##   comm: ./path/to/communicator.py    ## Optional
+##   comm: ./path/to/communicator.py    ## Optional. Not yet implemented.
 
 ## Nederland
+- afk:  3fm
+  naam: 3FM
+  url : http://icecast.omroep.nl/3fm-bb-mp3
+
+- afk:  "538"
+  naam: Radio 538
+  url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
+
+- afk:  decibel
+  naam: Radio Decibel
+  url:  http://91.221.151.253:80
+
+- afk:  pinguin
+  naam: Pinguin Radio
+  url:  http://pr320.pinguinradio.com:80
+
 - afk:  r1nl
   naam: Radio 1 (Nederland)
   url : http://icecast.omroep.nl/radio1-bb-mp3
@@ -25,18 +41,6 @@
   naam: Radio 6 (Nederland)
   url : http://icecast.omroep.nl/radio6-bb-mp3
 
-- afk:  3fm
-  naam: 3FM
-  url : http://icecast.omroep.nl/3fm-bb-mp3
-
-- afk:  "538"
-  naam: Radio 538
-  url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
-
-- afk:  pinguin
-  naam: Pinguin Radio
-  url:  http://pr320.pinguinradio.com:80/
-
 - afk:  slamfm
   naam: Slam FM
   url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
@@ -45,22 +49,24 @@
   naam: Sublime FM
   url : http://82.201.47.68/SublimeFM2
 
+
 ## België
+- afk:  humorzender
+  naam: Humorzender - Vlaanderen Lacht
+  url:  http://streaming.radionomy.com/humorzender
+
 - afk:  r1be
   naam: Radio 1 (België)
   url : http://mp3.streampower.be/radio1-high
 
-- afk:  humorzender
-  naam: Humorzender - Vlaanderen Lacht
-  url:  http://streaming.radionomy.com/humorzender
-  
+- afk:  scorpio
+  naam: Radio Scorpio 
+  url:  http://193.190.253.57:8000/stream
+ 
 - afk:  stubru
   naam: Studio Brussel
   url : http://mp3.streampower.be/stubru-high.mp3
 
-- afk:  scorpio
-  naam: Radio Scorpio 
-  url:  http://193.190.253.57:8000/stream
 
 ## Hongarije
 - afk:  risefm
