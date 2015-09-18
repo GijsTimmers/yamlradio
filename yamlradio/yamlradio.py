@@ -28,8 +28,17 @@ import re                       ## Regex
 class Parser():
     def __init__(self):
         ## Zenderdictionary aanmaken
-        with open(os.path.join(os.path.dirname(__file__), 
-        "zenders.yml"), "r") as f:
+        DEFAULT_YAML = os.path.join(os.path.dirname(__file__), "zenders.yml")
+        CUSTOM_YAML  = os.path.expanduser("~/.yamlradio.yml")
+        
+        if os.path.isfile(CUSTOM_YAML):
+            ## Load a user-definded yaml file
+            loaded_yaml = CUSTOM_YAML
+        else:
+            ## Load the included yaml file
+            loaded_yaml = DEFAULT_YAML
+        
+        with open(loaded_yaml, "r") as f:
             self.zenderdict = yaml.load(f)
         
         ## Parser instantiëren en de te verwachten argumenten meegeven

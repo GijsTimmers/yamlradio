@@ -3,7 +3,7 @@
 [![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 
-# radio
+# yamlradio
 A small Python script to play various radio stations from a terminal.
 
 ## Installation
@@ -27,18 +27,18 @@ On Arch:
     
     sudo pacman -S python2-pip mplayer
     
-You can install the other dependencies via `pip`:
+The other dependencies will be installed automatically when using `pip`:
 
-    sudo pip install argparse pyYAML py-getch cursor
+    sudo pip install yamlradio
 
 ## Usage
 
-    ./radio <CHANNEL-ABBREVIATION>
+    rd <CHANNEL-ABBREVIATION>
 
 e.g.
 
-    ./radio r2nl
-    ./radio stubru
+    rd r2nl
+    rd stubru
 
 Music will start playing automatically, press any of the following keys to exit:
 
@@ -48,5 +48,6 @@ Music will start playing automatically, press any of the following keys to exit:
 - <kbd>Ctrl</kbd> + <kbd>c</kbd>
 
 ## Adding other radio stations
-There's a YAML file in this repository, called `zenders.yml`. You can edit
-this file to add other radio stations.
+You can replace our fine choices with your own recommendations by creating
+a file in your home directory, called `.yamlradio.yml`. Adhere to the syntax
+defined in `zenders.yml`.

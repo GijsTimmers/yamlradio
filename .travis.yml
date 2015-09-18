@@ -24,7 +24,7 @@ before_install:
 
 ## Command to install pip dependencies
 install: 
-    - pip install argparse pyYAML py-getch cursor
+    - pip install yamlradio ## installleert ook dependencies van yamlradio
     - pip install colorama ## enkel ndz voor testen
 
 ## Actual script
