@@ -14,7 +14,8 @@
 ## CA 94042, USA.
 
 ## Moving to container-based infrastructure
-sudo: false
+## Does not work yet with sudo.
+#sudo: false
 
 ## Setting up the correct language
 language: python
@@ -22,8 +23,7 @@ python: "2.7"
 
 ## Command to install system dependencies
 before_install: 
-    - apt-get update -qq
-    - apt-get install python-pip mplayer
+    - sudo apt-get install python-pip mplayer
 
 ## Command to install pip dependencies
 install: 
