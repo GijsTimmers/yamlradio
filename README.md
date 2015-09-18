@@ -50,4 +50,5 @@ Music will start playing automatically, press any of the following keys to exit:
 ## Adding other radio stations
 You can replace our fine choices with your own recommendations by creating
 a file in your home directory, called `.yamlradio.yml`. Adhere to the syntax
-defined in `zenders.yml`.
+defined in [`zenders.yml`](yamlradio/zenders.yml), otherwise you may run into 
+some problems.
