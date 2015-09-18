@@ -27,7 +27,7 @@ def error():
 ###############################################################################
 print "Imports testen...",
 try:
-    from radio import radio
+    from yamlradio import yamlradio
     ok()
 except Exception as e:
     error()
@@ -35,7 +35,7 @@ except Exception as e:
 ###############################################################################
 print "Radio() instantiëren...",
 try:
-    rd = radio.Radio()
+    rd = yamlradio.Radio()
     ok()
 except Exception as e:
     error()
@@ -43,7 +43,7 @@ except Exception as e:
 ###############################################################################
 print "Variabelen testen...",
 try:
-    pa = radio.Parser()
+    pa = yamlradio.Parser()
     ok()
 except Exception as e:
     error()

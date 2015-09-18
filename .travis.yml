@@ -13,6 +13,9 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
+## Moving to container-based infrastructure
+sudo: false
+
 ## Setting up the correct language
 language: python
 python: "2.7"
