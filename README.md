@@ -60,7 +60,7 @@ may come in handy:
     $ rd st      ## Now press the TAB key
     $ rd stubru  ## Result
     
-For this to work, execute the following commands:
+For this to work, execute the following commands
 
     $ activate-global-python-argcomplete --user
     
@@ -76,7 +76,11 @@ Now, add the following lines at the end of your `~/.zshrc`:
     source ~/.bash_completion.d/python-argcomplete.sh
 
     ## now name the to be completed scripts
-    eval "$(register-python-argcomplete /usr/local/bin/rd)"
+    eval "$(register-python-argcomplete `which rd`)"
+
+Then, source the configuration to apply it:
+
+    source ~/.zshrc
 
 If the command `activate-global-python-argcomplete --user` fails, make sure that
 you have `argcomplete` installed. If you install `yamlradio` with `pip`, 
