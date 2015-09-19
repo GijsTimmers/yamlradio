@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 setup(
   name = "yamlradio",
   packages = ["yamlradio"],
-  version = "1.1",
+  version = "1.2",
   description = "A small Python package to play radio stations as defined in a YAML file.",
   author = "Gijs Timmers",
   author_email = "gijs.timmers@student.kuleuven.be",
