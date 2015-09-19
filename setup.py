@@ -6,7 +6,7 @@ setup(
   description = "A small Python package to play radio stations as defined in a YAML file.",
   author = "Gijs Timmers",
   author_email = "gijs.timmers@student.kuleuven.be",
-  url = "https://github.com/GijsTimmers/radio",
+  url = "https://github.com/GijsTimmers/yamlradio",
   keywords = ["radio", "terminal", "yaml"],
   install_requires = ["argparse", "pyYAML", "py-getch", "cursor"],
   classifiers = [],

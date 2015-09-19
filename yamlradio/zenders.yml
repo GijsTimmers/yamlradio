@@ -41,8 +41,8 @@
   naam: Radio 6 (Nederland)
   url : http://icecast.omroep.nl/radio6-bb-mp3
 
-- afk:  slamfm
-  naam: Slam FM
+- afk:  slam
+  naam: SLAM!
   url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
     
 - afk:  sublimefm
