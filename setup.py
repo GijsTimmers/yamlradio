@@ -8,7 +8,7 @@ setup(
   author_email = "gijs.timmers@student.kuleuven.be",
   url = "https://github.com/GijsTimmers/yamlradio",
   keywords = ["radio", "terminal", "yaml"],
-  install_requires = ["argparse", "pyYAML", "py-getch", "cursor"],
+  install_requires = ["argparse", "argcomplete", "pyYAML", "py-getch", "cursor"],
   classifiers = [],
   entry_points = {
         'console_scripts': ['rd=yamlradio.yamlradio:main']},
