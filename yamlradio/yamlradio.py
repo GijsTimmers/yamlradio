@@ -19,6 +19,7 @@ import yaml                     ## Configuratie inlezen
 import cursor                   ## Cursor tonen/verbergen
 import threading                ## Voor multithreading
 import subprocess               ## Om programma's uit te voeren vanuit Python
+import argcomplete              ## Argumenten aanvullen 
 import argparse                 ## Parst argumenten
 import getch                    ## Toetsaanslagen opvangen
 import time                     ## Polling voor opvangen keypress
@@ -49,10 +50,10 @@ class Parser():
         in self.zenderdict]
         self.parser.add_argument('zender', choices=afkortingenlijst)
         
-        
     def zendervinden(self):
         ## De ingevoerde argumenten parsen
-        argumenten = self.parser.parse_args()
+        argcomplete.autocomplete(self.parser)
+        argumenten=self.parser.parse_args()
         
         for combinatie in self.zenderdict:
             if combinatie["afk"] == argumenten.zender:
