@@ -18,5 +18,7 @@ import importlib
 
 class Fabriek():
     def returnCommunicatorObject(self, comm):
+        ## Ontvangt als argument de gewenste communicator als string, en geeft
+        ## daarvoor een geïmporteerd communicatorobject terug.
         co = importlib.import_module("communicators.%s" % comm).Communicator()
         return co
