@@ -7,17 +7,7 @@
 A small Python script to play various radio stations from a terminal.
 
 ## Installation
-Dependencies:
-
-- `pip`
-- `mplayer`
-- `argparse`
-- `pyYAML`
-- `py-getch`
-- `cursor`
-
-
-You can install pip and mplayer via your package manager:
+### Installing via `pip` (recommended)
 
 On Ubuntu:
     
@@ -27,9 +17,33 @@ On Arch:
     
     $ sudo pacman -S python2-pip mplayer
     
-The other dependencies will be installed automatically when using `pip`:
+After installing `pip`, use it to install `yamlradio`:
 
     $ sudo pip install yamlradio
+
+You don't need to mind the dependencies as they will be installed automatically.
+
+### Installing via `git clone`
+
+First, install the dependencies:
+
+- `git`
+- `pip`
+- `mplayer`
+- `argparse`
+- `argcomplete`
+- `pyYAML`
+- `py-getch`
+- `cursor`
+
+Afterwards, clone `yamlradio`:
+
+    git clone https://github.com/GijsTimmers/yamlradio.git
+
+Now run `yamlradio.py`:
+
+    cd yamlradio/yamlradio
+    ./yamlradio.py [channel_abbreviation]
 
 ## Usage
 
