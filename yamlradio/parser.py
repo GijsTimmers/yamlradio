@@ -14,12 +14,10 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import os                       ## Basislib
-import yaml                     ## Configuratie inlezen
 import argcomplete              ## Argumenten aanvullen 
 import argparse                 ## Parst argumenten
-
-
+import yaml                     ## Configuratie inlezen
+import os                       ## Basislib
 
 class Parser():
     def __init__(self):
@@ -55,7 +53,13 @@ class Parser():
             if combinatie["afk"] == argumenten.zender:
                 naam = combinatie["naam"]
                 url  = combinatie["url"]
-        return (naam, url)
+                try:
+                    ## Als er geen key "comm" bestaat, wordt de default com-
+                    ## municator gebruikt.
+                    comm = combinatie["comm"]
+                except KeyError:
+                    comm = "default"
+        return (naam, url, comm)
     
     
     def helpoutput(self, name=None):
