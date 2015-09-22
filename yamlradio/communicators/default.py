@@ -43,7 +43,7 @@ class Communicator():
         ## string weg te nemen.
         
         self.nieuweInfo = regel
-        
+
         if self.nieuweInfo != self.oudeInfo:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
             sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuweInfo))
