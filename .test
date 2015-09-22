@@ -32,6 +32,7 @@ try:
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
 ###############################################################################
 print "Radio() instantiëren...",
 try:
@@ -40,6 +41,7 @@ try:
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
 ###############################################################################
 print "Variabelen testen...",
 try:
@@ -48,6 +50,7 @@ try:
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
 ###############################################################################
 print "Afspeelmechanisme testen..."
 try:
@@ -68,4 +71,5 @@ try:
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
 ###############################################################################
