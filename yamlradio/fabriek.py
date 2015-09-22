@@ -23,6 +23,7 @@ class Fabriek():
         try:
             co = importlib.import_module("communicators.%s" % comm).Communicator()
         except ImportError:
-            co = importlib.import_module("communicators.default").Communicator()
+            co = importlib.import_module("communicators.default").Communicator()        
         finally:
             return co
+        
