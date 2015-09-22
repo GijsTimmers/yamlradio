@@ -1,6 +1,8 @@
-[![Build Status](https://travis-ci.org/GijsTimmers/radio.svg)](https://travis-ci.org/GijsTimmers/radio)
+[![Build Status](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master)]
+(https://travis-ci.org/GijsTimmers/yamlradio)
 
-[![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)]
+(https://creativecommons.org/licenses/by-sa/4.0/)
 
 
 # yamlradio
@@ -103,11 +105,11 @@ you have `argcomplete` installed. If you install `yamlradio` with `pip`,
 
 ## Adding custom communicators
 
-If you think the display of ICY information can be improved, you can write custom
-communicators for your channel in the directory `communicators/`. Make sure the
-file name is the same as the channel's abbreviation, ending with `.py`. If the
-channel's abbreviation starts with a digit, start the filename with a underscore
-(`_`). For example:
+If you think the display of ICY information can be improved, you can write
+custom communicators for your channel in the directory `communicators/`. 
+Make sure the file name is the same as the channel's abbreviation, ending with
+`.py`. If the channel's abbreviation starts with a digit, start the filename
+with an underscore (`_`). For example:
 
 - the communicator for `stubru` is `stubru.py`
 - the communicator for `538` is `_538.py`
