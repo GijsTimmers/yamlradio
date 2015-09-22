@@ -17,6 +17,7 @@
 from radio import Radio
 from keypress import Keypress
 from parser import Parser
+from fabriek import Fabriek
 
 import cursor                   ## Cursor tonen/verbergen
 import threading                ## Voor multithreading
@@ -27,12 +28,14 @@ import re                       ## Regex
 
 def main():
     pa = Parser()
-    naam, url = pa.zendervinden()
-    
+    naam, url, comm = pa.zendervinden()
     cursor.hide()
     
+    fa = Fabriek()
+    co = fa.returnCommunicatorObject(comm)
+        
     rd = Radio()
-    t = threading.Thread(target=rd.afspelen, args=(naam, url))
+    t = threading.Thread(target=rd.afspelen, args=(naam, url, co))
     t.start()
     
     ## Afspelen stoppen na drukken op één van de EXITKEYS

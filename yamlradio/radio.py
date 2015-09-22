@@ -14,21 +14,26 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import re                       ## Regex
-import os                       ## Basislib
-import sys                      ## Basislib
-import subprocess               ## Om programma's uit te voeren vanuit Python
+## Later weghalen en vervangen door fabriek
+#from communicators.default import Communicator
 
+import subprocess               ## Om programma's uit te voeren vanuit Python
+import sys                      ## Basislib
+import os                       ## Basislib
+import re                       ## Regex
 
 class Radio():
     def __init__(self):
-        self.BREEDTE_TERMINAL = 80
         if os.name == "posix":
             self.cmd = "mplayer"
         else:
             self.cmd = "mplayer.exe"
+        
+        ## Later weghalen en vervangen door fabriek
+        #self.co = Communicator()
 
-    def afspelen(self, zender, url):
+    def afspelen(self, zender, url, co):
+        self.co = co
         try:        
             self.stream = subprocess.Popen([self.cmd, url], \
             stdin=subprocess.PIPE, \
@@ -44,50 +49,25 @@ class Radio():
             print "Arch:    sudo pacman -S mplayer"
             print "Windows: http://sourceforge.net/projects/mplayer-win32/"
             sys.exit() ## Moet nog aan gewerkt worden
-            
+        
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
         ## in de stringnaam: "België" zou anders een probleem geven.
-        print "Speelt nu af: [{zender}]"\
-              .format(zender=zender.encode("utf-8"))
-              
-        ## Huidige radiozender weergeven als terminaltitel.
-        sys.stdout.write("\x1b]2;{zender}\x07"\
-                         .format(zender=zender.encode("utf-8")))
+        self.co.processChannelName(zender.encode("utf-8"))
         
         
         for regel in iter(self.stream.stdout.readline, ''):
             ## Per nieuwe entry in stdout.readline wordt door deze loop
             ## gegaan. Als bijvoorbeeld de ICY-info verandert, wordt er
             ## opnieuw geprint: ICY Info: ... Dat wordt opgepakt door de if,
-            ## en geprint. Zo hebben we iedere keer de meest recente
-            ## info te pakken. Het oudeInfo/nieuweInfo-mechanisme is een
-            ## mechanisme om iedere keer alleen het nieuwste ICY-bericht
-            ## in het leesvenster te plaatsen.
+            ## en doorgegeven aan de communicator. Zo hebben we iedere keer
+            ## de recentste info te pakken.
             
-            oudeInfo = ""
             if re.match("^ICY", regel):
-                ## Wat uitleg over de regex:
-                ## Alles tussen
-                ## ICY Info: StreamTitle='
-                ## en
-                ## ';
-                ## wordt opgeslagen als nieuweInfo. .* is non-greedy gemaakt
-                ## met een vraagteken, zodat een eventueel volgende streamUrl
-                ## niet wordt opgenomen in de nieuweInfo. Uiteindelijk nog een
-                ## strip()-statement om losse spaties voorin en achterin de
-                ## string weg te nemen.
-                nieuweInfo = re.findall(
+                regel = re.findall(
                 "(?<=ICY Info: StreamTitle=').*?(?=';)", regel
                                         )[0].strip()[:64]
-                if nieuweInfo != oudeInfo:
-                    sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-                    sys.stdout.write("\r" + "Info:         [{info}]".format(info=nieuweInfo))
-                    oudeInfo = nieuweInfo
-            #else:
-                #sys.stdout.write("\rInfo:         [Geen info beschikbaar]")
-                #sys.stdout.flush()
+                self.co.processIcy(regel)
                 
-                    
             if re.match("^Exiting...", regel):
                 ## Op een nieuwe regel starten
                 sys.stdout.write("\n")
