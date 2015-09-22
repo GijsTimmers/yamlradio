@@ -14,14 +14,13 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-from radio import Radio
-from keypress import Keypress
-from parser import Parser
-from fabriek import Fabriek
+from .keypress import Keypress
+from .fabriek import Fabriek
+from .parser import Parser
+from .radio import Radio
 
-import cursor                   ## Cursor tonen/verbergen
 import threading                ## Voor multithreading
-
+import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
 import sys                      ## Basislib
 import re                       ## Regex
@@ -29,6 +28,7 @@ import re                       ## Regex
 def main():
     pa = Parser()
     naam, url, comm = pa.zendervinden()
+    #print naam, url, comm
     cursor.hide()
     
     fa = Fabriek()
@@ -47,6 +47,3 @@ def main():
     rd.stoppen()
     
     return 0
-
-if __name__ == '__main__':
-    main()

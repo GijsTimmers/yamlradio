@@ -14,18 +14,8 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import importlib
 
-class Fabriek():
-    def returnCommunicatorObject(self, comm):
-        ## Ontvangt als argument de gewenste communicator als string, en geeft
-        ## daarvoor een geïmporteerd communicatorobject terug.
-        try:
-            co = importlib.import_module(".communicators.%s" % comm, \
-            package="yamlradio").Communicator()
-        except ImportError:
-            co = importlib.import_module(".communicators.default", \
-            package="yamlradio").Communicator()
-        return co
-        
-        
+from yamlradio.yamlradio import main
+
+if __name__ == "__main__":
+    main()

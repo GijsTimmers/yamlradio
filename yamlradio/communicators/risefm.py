@@ -14,18 +14,11 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import importlib
+import default                  ## Superklasse
+import sys                      ## Basislib
+import re                       ## Regex
 
-class Fabriek():
-    def returnCommunicatorObject(self, comm):
-        ## Ontvangt als argument de gewenste communicator als string, en geeft
-        ## daarvoor een geïmporteerd communicatorobject terug.
-        try:
-            co = importlib.import_module(".communicators.%s" % comm, \
-            package="yamlradio").Communicator()
-        except ImportError:
-            co = importlib.import_module(".communicators.default", \
-            package="yamlradio").Communicator()
-        return co
-        
-        
+class Communicator(default.Communicator):
+    def processIcy(self, regel):
+        sys.stdout.write("\r" + "Info:         [{info}]".\
+        format(info="Geen informatie beschikbaar"))

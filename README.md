@@ -44,8 +44,8 @@ Afterwards, clone `yamlradio`:
 
 Now run `yamlradio.py`:
 
-    cd yamlradio/yamlradio
-    ./yamlradio.py [channel_abbreviation]
+    cd yamlradio
+    ./yamlradio-runner.py [channel_abbreviation]
 
 ## Usage
 

@@ -14,9 +14,6 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-## Later weghalen en vervangen door fabriek
-#from communicators.default import Communicator
-
 import subprocess               ## Om programma's uit te voeren vanuit Python
 import sys                      ## Basislib
 import os                       ## Basislib
@@ -29,9 +26,6 @@ class Radio():
         else:
             self.cmd = "mplayer.exe"
         
-        ## Later weghalen en vervangen door fabriek
-        #self.co = Communicator()
-
     def afspelen(self, zender, url, co):
         self.co = co
         try:        

@@ -20,7 +20,6 @@ import yaml                     ## Configuratie inlezen
 import os                       ## Basislib
 import re                       ## Regex
 
-
 class Parser():
     def __init__(self):
         ## Zenderdictionary aanmaken
