@@ -14,12 +14,11 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import os                       ## Basislib
-import yaml                     ## Configuratie inlezen
 import argcomplete              ## Argumenten aanvullen 
 import argparse                 ## Parst argumenten
-
-
+import yaml                     ## Configuratie inlezen
+import os                       ## Basislib
+import re                       ## Regex
 
 class Parser():
     def __init__(self):
@@ -55,8 +54,13 @@ class Parser():
             if combinatie["afk"] == argumenten.zender:
                 naam = combinatie["naam"]
                 url  = combinatie["url"]
-        return (naam, url)
-    
+                
+                if re.match("\d", combinatie["afk"][0]):
+                    comm = "_" + combinatie["afk"]
+                else:
+                    comm = combinatie["afk"]
+                    
+        return (naam, url, comm)    
     
     def helpoutput(self, name=None):
         ## We schrijven een eigen helpoutput, omdat die van argparse hier niet

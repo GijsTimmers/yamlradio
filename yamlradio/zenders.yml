@@ -10,7 +10,7 @@
 ## - afk: channel-abbreviation
 ##   naam: Full Radio Station Name      ## Necessary
 ##   url:  http://url-to-radio-stream   ## Necessary
-##   comm: ./path/to/communicator.py    ## Optional. Not yet implemented.
+##   comm: communicatorname             ## Optional
 
 ## Nederland
 - afk:  3fm
@@ -66,6 +66,7 @@
 - afk:  stubru
   naam: Studio Brussel
   url : http://mp3.streampower.be/stubru-high.mp3
+  comm: stubru
 
 
 ## Hongarije

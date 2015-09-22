@@ -16,6 +16,7 @@
 
 import time
 import threading
+import subprocess
 from colorama import Fore, Style
 
 ###############################################################################
@@ -27,45 +28,66 @@ def error():
 ###############################################################################
 print "Imports testen...",
 try:
-    from yamlradio import yamlradio
+    from yamlradio.yamlradio import main
+    from yamlradio.keypress import Keypress
+    from yamlradio.fabriek import Fabriek
+    from yamlradio.parser import Parser
+    from yamlradio.radio import Radio
+    
     ok()
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
 ###############################################################################
 print "Radio() instantiëren...",
 try:
-    rd = yamlradio.Radio()
+    rd = Radio()
     ok()
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
+###############################################################################
+print "Fabriek() instantiëren...",
+try:
+    fa = Fabriek()
+    ok()
+except Exception as e:
+    error()
+    print e.message, e.args
+    exit(1)
 ###############################################################################
 print "Variabelen testen...",
 try:
-    pa = yamlradio.Parser()
+    pa = Parser()
     ok()
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
 ###############################################################################
 print "Afspeelmechanisme testen..."
+afkortingenlijst = [combinatie["afk"] for combinatie \
+in pa.zenderdict]
+print pa.zenderdict
 try:
-    afkortingenlijst = [combinatie["afk"] for combinatie \
-    in pa.zenderdict]
-        
     for combinatie in pa.zenderdict:
         naam = combinatie["naam"]
         url  = combinatie["url"]
-        
-        t = threading.Thread(target=rd.afspelen, args=(naam, url))
+        co = fa.returnCommunicatorObject("default")
+        t = threading.Thread(target=rd.afspelen, args=(naam, url, co))
         t.start()
         time.sleep(3)
         rd.stoppen()
         t.join()
+        #p = subprocess.Popen(["./yamlradio/yamlradio.py", afk])
+        #time.sleep(3)
+        #p.kill()
         ok()
-        
 except Exception as e:
     error()
     print e.message, e.args
+    exit(1)
+
 ###############################################################################

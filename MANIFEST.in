@@ -1,1 +1,2 @@
 include yamlradio/zenders.yml
+include yamlradio/communicators/*

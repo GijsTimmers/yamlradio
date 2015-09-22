@@ -1,6 +1,8 @@
-[![Build Status](https://travis-ci.org/GijsTimmers/radio.svg)](https://travis-ci.org/GijsTimmers/radio)
+[![Build Status](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master)]
+(https://travis-ci.org/GijsTimmers/yamlradio)
 
-[![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)]
+(https://creativecommons.org/licenses/by-sa/4.0/)
 
 
 # yamlradio
@@ -42,8 +44,8 @@ Afterwards, clone `yamlradio`:
 
 Now run `yamlradio.py`:
 
-    cd yamlradio/yamlradio
-    ./yamlradio.py [channel_abbreviation]
+    cd yamlradio
+    ./yamlradio-runner.py [channel_abbreviation]
 
 ## Usage
 
@@ -62,6 +64,7 @@ Music will start playing automatically, press any of the following keys to exit:
 - <kbd>Ctrl</kbd> + <kbd>c</kbd>
 
 ## Adding other radio stations
+
 You can replace our fine choices with your own recommendations by creating
 a file in your home directory, called `.yamlradio.yml`. Adhere to the syntax
 defined in [`zenders.yml`](yamlradio/zenders.yml), otherwise you may run into 
@@ -99,3 +102,23 @@ Then, source the configuration to apply it:
 If the command `activate-global-python-argcomplete --user` fails, make sure that
 you have `argcomplete` installed. If you install `yamlradio` with `pip`, 
 `argcomplete` gets installed automatically.
+
+## Adding custom communicators
+
+If you think the display of ICY information can be improved, you can write
+custom communicators for your channel in the directory `communicators/`. 
+Make sure the file name is the same as the channel's abbreviation, ending with
+`.py`. If the channel's abbreviation starts with a digit, start the filename
+with an underscore (`_`). For example:
+
+- the communicator for `Studio Brussel` is `stubru.py`
+- the communicator for `Radio 538` is `_538.py`
+
+There are two methods at your disposal:
+
+- `processChannelName(self, zender)`, which gets called just before playing
+the radio station, with `zender` being the channel name. Edit this method to 
+change the way the channel name is displayed.
+- `processIcy(self, regel)`, which gets called every time the radio station
+sends new information via a ICY string, with `regel` being the sent string. Edit
+this method to change the way the ICY information is displayed.
