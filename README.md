@@ -111,8 +111,8 @@ Make sure the file name is the same as the channel's abbreviation, ending with
 `.py`. If the channel's abbreviation starts with a digit, start the filename
 with an underscore (`_`). For example:
 
-- the communicator for `stubru` is `stubru.py`
-- the communicator for `538` is `_538.py`
+- the communicator for `Studio Brussel` is `stubru.py`
+- the communicator for `Radio 538` is `_538.py`
 
 There are two methods at your disposal:
 
