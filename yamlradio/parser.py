@@ -18,10 +18,8 @@ import argcomplete              ## Argumenten aanvullen
 import argparse                 ## Parst argumenten
 import yaml                     ## Configuratie inlezen
 import os                       ## Basislib
-<<<<<<< HEAD
 import re                       ## Regex
-=======
->>>>>>> c0227fe21c6a033a5329714bb66b8047d5975840
+
 
 class Parser():
     def __init__(self):
