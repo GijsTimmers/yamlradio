@@ -18,7 +18,6 @@ import default                  ## Superklasse
 import sys                      ## Basislib
 import re                       ## Regex
 
-
 class Communicator(default.Communicator):
     def processIcy(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme

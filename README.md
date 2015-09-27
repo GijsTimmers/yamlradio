@@ -1,6 +1,9 @@
 [![Build Status](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master)]
 (https://travis-ci.org/GijsTimmers/yamlradio)
 
+[![PyPI version](https://badge.fury.io/py/yamlradio.svg)]
+(http://badge.fury.io/py/yamlradio)
+
 [![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)]
 (https://creativecommons.org/licenses/by-sa/4.0/)
 
@@ -40,12 +43,12 @@ First, install the dependencies:
 
 Afterwards, clone `yamlradio`:
 
-    git clone https://github.com/GijsTimmers/yamlradio.git
+    $ git clone https://github.com/GijsTimmers/yamlradio.git
 
 Now run `yamlradio.py`:
 
-    cd yamlradio
-    ./yamlradio-runner.py [channel_abbreviation]
+    $ cd yamlradio
+    $ ./yamlradio-runner.py [channel_abbreviation]
 
 ## Usage
 
@@ -97,7 +100,7 @@ Now, add the following lines at the end of your `~/.zshrc`:
 
 Then, source the configuration to apply it:
 
-    source ~/.zshrc
+    $ source ~/.zshrc
 
 If the command `activate-global-python-argcomplete --user` fails, make sure that
 you have `argcomplete` installed. If you install `yamlradio` with `pip`, 

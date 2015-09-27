@@ -22,7 +22,6 @@ from .radio import Radio
 import threading                ## Voor multithreading
 import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
-import sys                      ## Basislib
 import re                       ## Regex
 
 def main():
