@@ -14,7 +14,7 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-from yamlradio.yamlradio import main
+from yamlradio import rd
 
 if __name__ == "__main__":
-    main()
+    rd()
