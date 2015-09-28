@@ -11,6 +11,6 @@ setup(
   install_requires = ["argparse", "argcomplete", "pyYAML", "py-getch", "cursor"],
   classifiers = [],
   entry_points = {
-        'console_scripts': ['rd=yamlradio.yamlradio:main']},
+        'console_scripts': ['rd=yamlradio:rd']},
   include_package_data = True
 )
