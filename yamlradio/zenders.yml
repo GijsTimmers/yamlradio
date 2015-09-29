@@ -49,8 +49,11 @@
   naam: Sublime FM
   url : http://82.201.47.68/SublimeFM2
 
-
 ## België
+- afk:  hitfm
+  naam: Hit fm
+  url:  http://94.23.48.124:8000/;stream/1
+  
 - afk:  humorzender
   naam: Humorzender - Vlaanderen Lacht
   url:  http://streaming.radionomy.com/humorzender

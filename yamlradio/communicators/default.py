@@ -14,7 +14,7 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import re
+#import re
 import sys
 
 class Communicator():
