@@ -20,28 +20,17 @@ import re                       ## Regex
 
 class Communicator(default.Communicator):
     def processIcy(self, regel):
-        ## Het oudeInfo/nieuweInfo-mechanisme
-        ## is een mechanisme om iedere keer alleen het nieuwste ICY-bericht
-        ## in het leesvenster te plaatsen.
-        ## Wat uitleg over de regex:
-        ## Alles tussen
-        ## ICY Info: StreamTitle='
-        ## en
-        ## ';
-        ## wordt opgeslagen als nieuweInfo. .* is non-greedy gemaakt
-        ## met een vraagteken, zodat een eventueel volgende streamUrl
-        ## niet wordt opgenomen in de nieuweInfo. Uiteindelijk nog een
-        ## strip()-statement om losse spaties voorin en achterin de
-        ## string weg te nemen.
-        
-        self.nieuweInfo = regel
-        if self.nieuweInfo != self.oudeInfo:
-            if " - " in self.nieuweInfo:
+        regel = self.checkIfIcyIsNew(regel)
+        if regel:  
+            if " - " in regel:
                 ## Als er een liedje wordt afgespeeld (gekenmerkt door het
                 ## streepje), wordt de string omgezet in kleine letters, be-
                 ## ginnend met een hoofdletter.
-                self.nieuweInfo = self.nieuweInfo.title()
+                regel = regel.title()
+                sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+                sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
             
-            sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-            sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuweInfo))
-            self.oudeInfo = self.nieuweInfo
+            else:
+                sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+                sys.stdout.write("\r" + "Info:         [{info}]".
+                format(info=regel))

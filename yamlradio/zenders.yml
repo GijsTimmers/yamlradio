@@ -66,10 +66,9 @@
 - afk:  stubru
   naam: Studio Brussel
   url : http://mp3.streampower.be/stubru-high.mp3
-  comm: stubru
-
+  #comm: stubru
 
 ## Hongarije
 - afk:  risefm
   naam: RiseFM
-  url : http://mastersound.hu/clubfmplay_hq
+  url : http://risefm2.stereoplayer.hu:8080/risefm_hq

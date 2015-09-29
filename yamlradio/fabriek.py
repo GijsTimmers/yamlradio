@@ -15,11 +15,30 @@
 ## CA 94042, USA.
 
 import importlib
+import sys
+import os
+
 
 class Fabriek():
     def returnCommunicatorObject(self, comm):
-        ## Ontvangt als argument de gewenste communicator als string, en geeft
-        ## daarvoor een geïmporteerd communicatorobject terug.
+        """
+        try:
+            ## Als er geen bestanden zijn in de configuratiemap, is os.listdir
+            ## False en wordt er een AssertionError gegooid. Als de map zelfs 
+            ## niet bestaat, wordt er een OSError gegooid omdat os.listdir dan
+            ## niet uitgevoerd kan worden.
+            assert os.listdir(os.path.join(os.path.expanduser("~"), ".yamlradio", "communicators"))
+        except OSError:
+            print "Map bestaat niet"
+        except AssertionError:
+            print "Map is leeg"
+        
+        #sys.path.append(os.path.join(os.path.expanduser("~"), ".yamlradio", "communicators"))
+        sys.path.append(os.path.join(os.path.expanduser("~"), ".yamlradio"))
+        co = importlib.import_module("communicators.default2")
+        print co
+        exit()
+        """
         try:
             co = importlib.import_module(".communicators.%s" % comm, \
             package="yamlradio").Communicator()

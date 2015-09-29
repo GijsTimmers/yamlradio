@@ -21,30 +21,29 @@ class Communicator():
     def __init__(self):
         self.oudeInfo = ""
         self.BREEDTE_TERMINAL = 80
+
     def processChannelName(self, zender):
         print "Speelt nu af: [{zender}]".format(zender=zender)
         
         ## Huidige radiozender weergeven als terminaltitel.
         sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
-        
-    def processIcy(self, regel):
+    
+    def checkIfIcyIsNew(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme
         ## is een mechanisme om iedere keer alleen het nieuwste ICY-bericht
         ## in het leesvenster te plaatsen.
-        ## Wat uitleg over de regex:
-        ## Alles tussen
-        ## ICY Info: StreamTitle='
-        ## en
-        ## ';
-        ## wordt opgeslagen als nieuweInfo. .* is non-greedy gemaakt
-        ## met een vraagteken, zodat een eventueel volgende streamUrl
-        ## niet wordt opgenomen in de nieuweInfo. Uiteindelijk nog een
-        ## strip()-statement om losse spaties voorin en achterin de
-        ## string weg te nemen.
-        
         self.nieuweInfo = regel
-
         if self.nieuweInfo != self.oudeInfo:
-            sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-            sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuweInfo))
             self.oudeInfo = self.nieuweInfo
+            return self.nieuweInfo
+        else:
+            return None
+
+    def processIcy(self, regel):
+        ## Ontvangen ICY-tekst doorgeven aan checkIfIcyIsNew() om te kijken of
+        ## ze nieuw is. Indien ze hetzelfde is, gebeurt er niks.
+        
+        regel = self.checkIfIcyIsNew(regel)
+        if regel:  
+            sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+            sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
