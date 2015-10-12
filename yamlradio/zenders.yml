@@ -21,6 +21,10 @@
   naam: Radio 538
   url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
 
+- afk:  bnr
+  naam: BNR Nieuwsradio
+  url:  http://icecast-bnr.cdp.triple-it.nl/bnr_mp3_128_03
+
 - afk:  decibel
   naam: Radio Decibel
   url:  http://91.221.151.253:80

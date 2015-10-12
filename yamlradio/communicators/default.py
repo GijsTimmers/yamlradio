@@ -33,12 +33,12 @@ class Communicator():
         ## is een mechanisme om iedere keer alleen het nieuwste ICY-bericht
         ## in het leesvenster te plaatsen.
         self.nieuweInfo = regel
-        if self.nieuweInfo != self.oudeInfo:
+        if self.nieuweInfo == self.oudeInfo:
+            return None
+        else:
             self.oudeInfo = self.nieuweInfo
             return self.nieuweInfo
-        else:
-            return None
-
+            
     def processIcy(self, regel):
         ## Ontvangen ICY-tekst doorgeven aan checkIfIcyIsNew() om te kijken of
         ## ze nieuw is. Indien ze hetzelfde is, gebeurt er niks.
@@ -47,3 +47,6 @@ class Communicator():
         if regel:  
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
             sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
+        else:
+            sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+            sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=regel))
