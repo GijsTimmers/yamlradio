@@ -29,6 +29,10 @@
   naam: Radio Decibel
   url:  http://91.221.151.253:80
 
+- afk:  funx
+  naam: FunX
+  url:  http://icecast.omroep.nl/funx-bb-mp3
+
 - afk:  pinguin
   naam: Pinguin Radio
   url:  http://pr320.pinguinradio.com:80
@@ -44,6 +48,10 @@
 - afk:  r6nl
   naam: Radio 6 (Nederland)
   url : http://icecast.omroep.nl/radio6-bb-mp3
+
+- afk:  r6nljz
+  naam: Radio 6 Jazz (Nederland)
+  url:  http://icecast.omroep.nl/radio6-jazz-bb-mp3
 
 - afk:  slam
   naam: SLAM!
