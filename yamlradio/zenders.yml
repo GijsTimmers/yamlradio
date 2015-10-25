@@ -33,6 +33,10 @@
   naam: FunX
   url:  http://icecast.omroep.nl/funx-bb-mp3
 
+- afk:  lfm
+  naam: L-FM Landerd
+  url:  http://85.214.102.86:8000
+
 - afk:  pinguin
   naam: Pinguin Radio
   url:  http://pr320.pinguinradio.com:80
@@ -52,6 +56,10 @@
 - afk:  r6nljz
   naam: Radio 6 Jazz (Nederland)
   url:  http://icecast.omroep.nl/radio6-jazz-bb-mp3
+
+- afk:  skyline
+  naam: SkyLine
+  url:  http://icecast.streamonecloud.net/zz5giI7VF5B6
 
 - afk:  slam
   naam: SLAM!
