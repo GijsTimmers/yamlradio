@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -23,7 +23,7 @@ class Communicator():
         self.BREEDTE_TERMINAL = 80
 
     def processChannelName(self, zender):
-        print "Speelt nu af: [{zender}]".format(zender=zender)
+        print("Speelt nu af: [{zender}]".format(zender=zender.decode("utf-8")))
         
         ## Huidige radiozender weergeven als terminaltitel.
         sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))

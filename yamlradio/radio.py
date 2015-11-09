@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -37,11 +37,11 @@ class Radio():
             universal_newlines=True)
             
         except OSError:
-            print "Kon geen mplayer-executable vinden in $PATH."
-            print "Installeer deze eerst:"
-            print "Ubuntu:  sudo apt-get install mplayer"
-            print "Arch:    sudo pacman -S mplayer"
-            print "Windows: http://sourceforge.net/projects/mplayer-win32/"
+            print("Kon geen mplayer-executable vinden in $PATH.")
+            print("Installeer deze eerst:")
+            print("Ubuntu:  sudo apt-get install mplayer")
+            print("Arch:    sudo pacman -S mplayer")
+            print("Windows: http://sourceforge.net/projects/mplayer-win32/")
             sys.exit() ## Moet nog aan gewerkt worden
         
         ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
@@ -57,16 +57,22 @@ class Radio():
             ## de recentste info te pakken.
             
             if re.match("^ICY", regel):
+                
                 regel = re.findall(
                 "(?<=ICY Info: StreamTitle=').*?(?=';)", regel
                                         )[0].strip()[:64]
                 self.co.processIcy(regel)
+                #continue    
                 
             if re.match("^Exiting...", regel):
                 ## Op een nieuwe regel starten
                 sys.stdout.write("\n")
                 break
+            
         return()
+            
+            
+            
         
         
         
@@ -79,6 +85,7 @@ class Radio():
         ## de thread t loopt een for-loop, welke deze string opvangt. Als 
         ## reactie stopt de for-loop ('break'), en komen we aan bij het
         ## return()-statenment. De thread is nu beëindigd.
+        
         try:
             self.stream.communicate(input="q")
         

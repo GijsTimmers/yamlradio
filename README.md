@@ -34,7 +34,7 @@ First, install the dependencies:
 
 - `git`
 - `pip`
-- `mplayer`
+- `mplayer2` (important: the leagacty `mplayer` does not work very well)
 - `argparse`
 - `argcomplete`
 - `pyYAML`

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -14,7 +14,8 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import getch                    ## Toetsaanslagen opvangen
+#import getch                    ## Toetsaanslagen opvangen
+from .getch import getch
 
 class Keypress():
     def __init__(self):
@@ -26,7 +27,7 @@ class Keypress():
         self.EXITKEYS = set([KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC])
         
     def getexitkeypress(self):
-        keypress = getch.getch()
+        keypress = getch()
         if keypress in self.EXITKEYS:
             return True
         else:
