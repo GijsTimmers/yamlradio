@@ -36,12 +36,12 @@ def main():
     rd = Radio()
     t = threading.Thread(target=rd.afspelen, args=(naam, url, co))
     t.start()
-    
-    ## Afspelen stoppen na drukken op één van de EXITKEYS
+
+    ## Afspelen stoppen na drukken op één van de EXITKEYS    
     kp = Keypress()
     while kp.getexitkeypress() == False:
         time.sleep(0.2)
-    
+
     cursor.show()
     rd.stoppen()
     

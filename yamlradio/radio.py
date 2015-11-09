@@ -15,6 +15,7 @@
 ## CA 94042, USA.
 
 import subprocess               ## Om programma's uit te voeren vanuit Python
+import html                     ## Ndz voor decoderen van zgn. HTML-entities
 import sys                      ## Basislib
 import os                       ## Basislib
 import re                       ## Regex
@@ -33,8 +34,9 @@ class Radio():
             stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, \
             stderr=subprocess.STDOUT, \
-            bufsize=1, \
-            universal_newlines=True)
+            bufsize=1)
+            #bufsize=1, \
+            #universal_newlines=True)
             
         except OSError:
             print("Kon geen mplayer-executable vinden in $PATH.")
@@ -50,6 +52,9 @@ class Radio():
         
         
         for regel in iter(self.stream.stdout.readline, ''):
+            ## Omzetten van bytes naar gewone string
+            regel = regel.decode("utf-8") 
+            #print("\r" + regel)
             ## Per nieuwe entry in stdout.readline wordt door deze loop
             ## gegaan. Als bijvoorbeeld de ICY-info verandert, wordt er
             ## opnieuw geprint: ICY Info: ... Dat wordt opgepakt door de if,
@@ -57,18 +62,26 @@ class Radio():
             ## de recentste info te pakken.
             
             if re.match("^ICY", regel):
-                
                 regel = re.findall(
                 "(?<=ICY Info: StreamTitle=').*?(?=';)", regel
                                         )[0].strip()[:64]
-                self.co.processIcy(regel)
-                #continue    
                 
-            if re.match("^Exiting...", regel):
+                ## Omzetten van zgn. HTML-entities in plaintext. Anders zien we
+                ## symbolen als &#40; in de ICY-info verschijnen.
+                regel = html.unescape(regel)
+                self.co.processIcy(regel)
+
+            
+            elif re.match("Server returned 404: File Not Found", regel):
+                sys.stdout.write("\rKan niet afspelen: stream offline\n")
+                sys.stdout.flush()
+                break                
+            
+            elif re.match("^Exiting...", regel):
                 ## Op een nieuwe regel starten
                 sys.stdout.write("\n")
                 break
-            
+        
         return()
             
             
@@ -86,11 +99,17 @@ class Radio():
         ## reactie stopt de for-loop ('break'), en komen we aan bij het
         ## return()-statenment. De thread is nu beëindigd.
         
+        self.stream.stdin.write(b"q")
+        self.stream.stdin.flush()
+        
+        """
         try:
-            self.stream.communicate(input="q")
+            self.stream.stdin.write(b"q")
+            self.stream.stdin.flush()
         
         ## IOError ontstaat soms door een deadlock in subprocess. Ik weet niet
         ## precies hoe ik die moet oplossen, daarom vang ik hem gewoon op 
         ## zonder er iets mee te doen.
         except IOError:
             sys.stdout.write("\n")
+        """
