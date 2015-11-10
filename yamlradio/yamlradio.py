@@ -22,27 +22,39 @@ from .radio import Radio
 import threading                ## Voor multithreading
 import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
+import sys
 import re                       ## Regex
 
 def main():
     pa = Parser()
     naam, url, comm = pa.zendervinden()
-    #print naam, url, comm
+    
     cursor.hide()
     
     fa = Fabriek()
     co = fa.returnCommunicatorObject(comm)
         
     rd = Radio()
-    t = threading.Thread(target=rd.afspelen, args=(naam, url, co))
-    t.start()
-
-    ## Afspelen stoppen na drukken op één van de EXITKEYS    
-    kp = Keypress()
-    while kp.getexitkeypress() == False:
-        time.sleep(0.2)
-
+    t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co))
+    
+        
+    with Keypress() as kp:
+        t1.start()
+        while t1.isAlive():
+            keypress = kp.getKeypress()
+            if keypress == "exit":
+                break
+            elif keypress == "volumeUp":
+                rd.volumeUp()
+            elif keypress == "volumeDown":
+                rd.volumeDown()
+            else:
+                pass
+                
+            ## Polling
+            time.sleep(0.1)
+            
+    
     cursor.show()
     rd.stoppen()
-    
     return 0

@@ -81,13 +81,20 @@ class Radio():
                 ## Op een nieuwe regel starten
                 sys.stdout.write("\n")
                 break
+            
         
         return()
             
             
-            
+    def volumeUp(self):
+        ## raise volume by 4 steps: emulates user pressing on 0 for 4 times
+        self.stream.stdin.write(b"000")
+        self.stream.stdin.flush()
         
-        
+    def volumeDown(self):
+        ## lower volume by 4 steps: emulates user pressing on 9 for 4 times
+        self.stream.stdin.write(b"99999")
+        self.stream.stdin.flush()
         
     def stoppen(self):
         ## Terminaltitel opnieuw instellen op "Terminal"
@@ -102,14 +109,3 @@ class Radio():
         self.stream.stdin.write(b"q")
         self.stream.stdin.flush()
         
-        """
-        try:
-            self.stream.stdin.write(b"q")
-            self.stream.stdin.flush()
-        
-        ## IOError ontstaat soms door een deadlock in subprocess. Ik weet niet
-        ## precies hoe ik die moet oplossen, daarom vang ik hem gewoon op 
-        ## zonder er iets mee te doen.
-        except IOError:
-            sys.stdout.write("\n")
-        """

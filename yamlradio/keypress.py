@@ -14,21 +14,69 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-#import getch                    ## Toetsaanslagen opvangen
-from .getch import getch
 
-class Keypress():
+import time                     ## For polling
+
+import sys                      ## Necessary stuff for logging keypresses
+import select                   ## Necessary stuff for logging keypresses
+import tty                      ## Necessary stuff for logging keypresses
+import termios                  ## Necessary stuff for logging keypresses
+
+class Keypress(object):
+    def __enter__(self):
+        ## doing some 'scary' terminal stuff so that stdin is non-blocking
+        self.old_settings = termios.tcgetattr(sys.stdin)
+        tty.setcbreak(sys.stdin.fileno())
+        return self
+
+    def __exit__(self, type, value, traceback):
+        ## restoring the terminal settings
+        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, self.old_settings)
+        
     def __init__(self):
-        KEY_ENTER  = "\r"
-        KEY_Q      = "q"
-        KEY_CTRL_C = "\x03"
-        KEY_ESC    = "\x1b"
+        ## defining keys we'll react on
+        KEY_LOWER_Q  = "q"
+        KEY_UPPER_Q  = "Q"
+        KEY_ENTER    = "\n"
+        KEY_SPACE    = " "
+        KEY_ESC      = "\x1b"
         
-        self.EXITKEYS = set([KEY_ENTER, KEY_Q, KEY_CTRL_C, KEY_ESC])
+        KEY_0        = "0"
+        KEY_PLUS     = "+"
+        KEY_EQUALS   = "="
         
-    def getexitkeypress(self):
-        keypress = getch()
-        if keypress in self.EXITKEYS:
-            return True
-        else:
-            return False 
+        KEY_9        = "9"
+        KEY_MINUS    = "-"
+        
+        self.EXITKEYS = set([
+                             KEY_LOWER_Q,
+                             KEY_UPPER_Q,
+                             KEY_ENTER, 
+                             KEY_SPACE,
+                             KEY_ESC
+                             ])
+        
+        self.VOLUMEUPKEYS = set([
+                                 KEY_0,
+                                 KEY_PLUS,
+                                 KEY_EQUALS
+                                 ])
+        
+        self.VOLUMEDOWNKEYS = set([
+                                 KEY_9,
+                                 KEY_MINUS
+                                 ])
+
+
+    def getKeypress(self):
+        if select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], []):
+            keypress = sys.stdin.read(1)
+            if keypress in self.EXITKEYS:
+                return "exit"
+            if keypress in self.VOLUMEUPKEYS:
+                return "volumeUp"
+            if keypress in self.VOLUMEDOWNKEYS:
+                return "volumeDown"
+            else:
+                pass
+        return False

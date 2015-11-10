@@ -1,5 +1,4 @@
 include yamlradio/zenders.yml
 include yamlradio/communicators/*.py
-include yamlradio/getch/* ## remove as soon as py-getch is updated
 global-exclude *pyc
 

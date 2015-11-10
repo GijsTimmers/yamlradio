@@ -14,7 +14,6 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-#import re
 import sys
 
 class Communicator():
@@ -26,7 +25,7 @@ class Communicator():
         print("Speelt nu af: [{zender}]".format(zender=zender.decode("utf-8")))
         
         ## Huidige radiozender weergeven als terminaltitel.
-        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
+        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender.decode("utf-8")))
     
     def checkIfIcyIsNew(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme
