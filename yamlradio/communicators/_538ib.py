@@ -14,20 +14,8 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import importlib
-import sys
-import os
+from . import _538              ## Superklasse
 
-
-class Fabriek():
-    def returnCommunicatorObject(self, comm):
-        try:
-            co = importlib.import_module(".communicators.%s" % comm, \
-            package="yamlradio").Communicator()
-        except ImportError:
-            co = importlib.import_module(".communicators.default", \
-            package="yamlradio").Communicator()
-        
-        return co
-        
-        
+class Communicator(_538.Communicator):
+    ## Alle eigenschappen van de Radio 538-communicator overnemen
+    pass
