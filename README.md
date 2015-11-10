@@ -15,16 +15,16 @@ A small Python script to play various radio stations from a terminal.
 ### Installing via `pip` (recommended)
 
 On Ubuntu:
-    
-    $ sudo apt-get install python-pip mplayer
+
+    $ sudo apt-get install python3-pip mplayer2
 
 On Arch:
-    
-    $ sudo pacman -S python2-pip mplayer
-    
+
+    $ sudo pacman -S python-pip mplayer
+
 After installing `pip`, use it to install `yamlradio`:
 
-    $ sudo pip install yamlradio
+    $ sudo pip3 install yamlradio
 
 You don't need to mind the dependencies as they will be installed automatically.
 
@@ -33,12 +33,11 @@ You don't need to mind the dependencies as they will be installed automatically.
 First, install the dependencies:
 
 - `git`
-- `pip`
-- `mplayer`
+- `python3`
+- `mplayer2` (important: the legacy `mplayer` does not work very well)
 - `argparse`
 - `argcomplete`
 - `pyYAML`
-- `py-getch`
 - `cursor`
 
 Afterwards, clone `yamlradio`:
@@ -61,10 +60,10 @@ e.g.
 
 Music will start playing automatically, press any of the following keys to exit:
 
-- <kbd>Enter</kbd>
 - <kbd>q</kbd>
 - <kbd>Esc</kbd>
-- <kbd>Ctrl</kbd> + <kbd>c</kbd>
+- <kbd>Enter</kbd>
+- <kbd>Space</kbd>
 
 ## Adding other radio stations
 
