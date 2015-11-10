@@ -19,17 +19,17 @@
 
 ## Setting up the correct language
 language: python
-python: "2.7"
+python: "3.4"
 
 ## Command to install system dependencies
 before_install:
     - sudo apt-get update -qq
-    - sudo apt-get install python-pip mplayer
+    - sudo apt-get install python-pip mplayer2
 
 ## Command to install pip dependencies
 install: 
-    - pip install yamlradio ## installleert ook dependencies van yamlradio
-    - pip install colorama ## enkel ndz voor testen
+    - pip3 install yamlradio ## installleert ook dependencies van yamlradio
+    - pip3 install colorama ## enkel ndz voor testen
 
 ## Actual script
 script: ./.test
