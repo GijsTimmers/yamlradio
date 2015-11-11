@@ -15,11 +15,8 @@
 ## CA 94042, USA.
 
 import importlib
-import sys
-import os
 
-
-class Fabriek():
+class Fabriek(object):
     def returnCommunicatorObject(self, comm):
         try:
             co = importlib.import_module(".communicators.%s" % comm, \

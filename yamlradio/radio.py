@@ -20,7 +20,7 @@ import sys                      ## Basislib
 import os                       ## Basislib
 import re                       ## Regex
 
-class Radio():
+class Radio(object):
     def __init__(self):
         if os.name == "posix":
             self.cmd = "mplayer"
@@ -70,7 +70,6 @@ class Radio():
                 ## symbolen als &#40; in de ICY-info verschijnen.
                 regel = html.unescape(regel)
                 self.co.processIcy(regel)
-
             
             elif re.match("Server returned 404: File Not Found", regel):
                 sys.stdout.write("\rKan niet afspelen: stream offline\n")
