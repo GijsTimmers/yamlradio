@@ -29,7 +29,7 @@ python: "3.4"
 addons:
   apt:
     packages:
-    - mplayer
+    - mplayer2
 
 
 ## Command to install pip dependencies
