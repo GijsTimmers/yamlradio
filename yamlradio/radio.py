@@ -35,16 +35,14 @@ class Radio(object):
             stdout=subprocess.PIPE, \
             stderr=subprocess.STDOUT, \
             bufsize=1)
-            #bufsize=1, \
-            #universal_newlines=True)
             
         except OSError:
             print("Kon geen mplayer-executable vinden in $PATH.")
             print("Installeer deze eerst:")
-            print("Ubuntu:  sudo apt-get install mplayer")
+            print("Ubuntu:  sudo apt-get install mplayer2")
             print("Arch:    sudo pacman -S mplayer")
             print("Windows: http://sourceforge.net/projects/mplayer-win32/")
-            sys.exit() ## Moet nog aan gewerkt worden
+            sys.exit()
         
         self.co.processChannelName(zender)
                 
@@ -77,10 +75,8 @@ class Radio(object):
                 ## Op een nieuwe regel starten
                 sys.stdout.write("\n")
                 break
-            
-        
+                
         return()
-            
             
     def volumeUp(self):
         ## raise volume by 4 steps: emulates user pressing on 0 for 4 times
