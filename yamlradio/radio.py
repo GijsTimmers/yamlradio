@@ -46,11 +46,8 @@ class Radio(object):
             print("Windows: http://sourceforge.net/projects/mplayer-win32/")
             sys.exit() ## Moet nog aan gewerkt worden
         
-        ## We encoderen de zendernaam in UTF-8 om errors te voorkomen
-        ## in de stringnaam: "België" zou anders een probleem geven.
-        self.co.processChannelName(zender.encode("utf-8"))
-        
-        
+        self.co.processChannelName(zender)
+                
         for regel in iter(self.stream.stdout.readline, ''):
             ## Omzetten van bytes naar gewone string
             regel = regel.decode("utf-8") 

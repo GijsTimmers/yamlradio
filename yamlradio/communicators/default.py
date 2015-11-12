@@ -22,10 +22,10 @@ class Communicator():
         self.BREEDTE_TERMINAL = 80
 
     def processChannelName(self, zender):
-        print("Speelt nu af: [{zender}]".format(zender=zender.decode("utf-8")))
+        print("Speelt nu af: [{zender}]".format(zender=zender))
         
         ## Huidige radiozender weergeven als terminaltitel.
-        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender.decode("utf-8")))
+        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
     
     def checkIfIcyIsNew(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme
