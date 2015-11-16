@@ -16,7 +16,7 @@
 
 import sys
 
-class Communicator():
+class Communicator(object):
     def __init__(self):
         self.oudeInfo = ""
         self.BREEDTE_TERMINAL = 80
@@ -49,3 +49,11 @@ class Communicator():
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
             sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=regel))
+    
+    def processVolumeUp(self):
+        sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
+    
+    def processVolumeDown(self):
+        sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))

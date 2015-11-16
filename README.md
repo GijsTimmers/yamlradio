@@ -1,8 +1,11 @@
+[![PyPI version](https://badge.fury.io/py/yamlradio.svg)]
+(http://badge.fury.io/py/yamlradio)
+
 [![Build Status](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master)]
 (https://travis-ci.org/GijsTimmers/yamlradio)
 
-[![PyPI version](https://badge.fury.io/py/yamlradio.svg)]
-(http://badge.fury.io/py/yamlradio)
+[![Code Health](https://landscape.io/github/GijsTimmers/yamlradio/master/landscape.svg?style=flat)]
+(https://landscape.io/github/GijsTimmers/yamlradio/master)
 
 [![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)]
 (https://creativecommons.org/licenses/by-sa/4.0/)

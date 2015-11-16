@@ -14,12 +14,9 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-
-import time                     ## For polling
-
+import tty                      ## Necessary stuff for logging keypresses
 import sys                      ## Necessary stuff for logging keypresses
 import select                   ## Necessary stuff for logging keypresses
-import tty                      ## Necessary stuff for logging keypresses
 import termios                  ## Necessary stuff for logging keypresses
 
 class Keypress(object):
@@ -68,15 +65,15 @@ class Keypress(object):
                                  ])
 
 
-    def getKeypress(self):
+    def getKeypress(self, q):
         if select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], []):
             keypress = sys.stdin.read(1)
             if keypress in self.EXITKEYS:
-                return "exit"
+                q.put("stop")
             if keypress in self.VOLUMEUPKEYS:
-                return "volumeUp"
+                q.put("volumeUp")
             if keypress in self.VOLUMEDOWNKEYS:
-                return "volumeDown"
+                q.put("volumeDown")
             else:
                 pass
         return False
