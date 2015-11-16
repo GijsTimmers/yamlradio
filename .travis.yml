@@ -31,10 +31,9 @@ addons:
 ## Command to install pip dependencies
 install: 
     - pip3 install yamlradio ## installleert ook dependencies van yamlradio
-    - pip3 install colorama  ## enkel ndz voor testen
 
 ## Actual script
-script: ./.test
+script: ./test.py
 
 ## Please don't spam my inbox
 notifications:
