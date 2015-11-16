@@ -27,8 +27,9 @@ class Radio(object):
         else:
             self.cmd = "mplayer.exe"
         
-    def afspelen(self, zender, url, co):
+    def afspelen(self, zender, url, co, q):
         self.co = co
+        self.q  = q
         try:        
             self.stream = subprocess.Popen([self.cmd, url], \
             stdin=subprocess.PIPE, \
@@ -42,7 +43,7 @@ class Radio(object):
             print("Ubuntu:  sudo apt-get install mplayer2")
             print("Arch:    sudo pacman -S mplayer")
             print("Windows: http://sourceforge.net/projects/mplayer-win32/")
-            sys.exit()
+            self.q.put("stop")
         
         self.co.processChannelName(zender)
                 
@@ -69,6 +70,7 @@ class Radio(object):
             elif re.match("Server returned 404: File Not Found", regel):
                 sys.stdout.write("\rKan niet afspelen: stream offline\n")
                 sys.stdout.flush()
+                q.put("404")
                 break                
             
             elif re.match("^Exiting...", regel):
@@ -83,10 +85,14 @@ class Radio(object):
         self.stream.stdin.write(b"000")
         self.stream.stdin.flush()
         
+        self.co.processVolumeUp()
+        
     def volumeDown(self):
         ## lower volume by 4 steps: emulates user pressing on 9 for 4 times
         self.stream.stdin.write(b"99999")
         self.stream.stdin.flush()
+        
+        self.co.processVolumeDown()
         
     def stoppen(self):
         ## Terminaltitel opnieuw instellen op "Terminal"

@@ -23,6 +23,8 @@ import threading                ## Voor multithreading
 import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
 
+import queue
+
 def main():
     pa = Parser()
     naam, url, comm = pa.zendervinden()
@@ -31,7 +33,50 @@ def main():
     
     fa = Fabriek()
     co = fa.returnCommunicatorObject(comm)
-        
+    
+    rd = Radio()
+    q  = queue.Queue()
+    t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co, q))
+    t1.start()
+
+    with Keypress() as kp:
+        while t1.isAlive():
+            key = kp.getKeypress(q)
+            
+            if q.empty():
+                time.sleep(0.1)
+            else:
+                intent = q.get()
+                if intent == "stop":
+                    q.task_done()
+                    cursor.show()
+                    rd.stoppen()
+                elif intent == "volumeUp":
+                    rd.volumeUp()
+                elif intent == "volumeDown":
+                    rd.volumeDown()
+    
+    """
+    with Keypress() as kp:
+        while t1.isAlive():
+            keypress = kp.getKeypress(q)
+            if q.empty():
+                time.sleep(0.1)
+            else:
+                te_ondernemen_actie = q.get()
+                #print (te_ondernemen_actie)
+                if te_ondernemen_actie == "stop":
+                    q.task_done()
+                    cursor.show()
+                    rd.stoppen()
+                elif te_ondernemen_actie == "volumeUp":
+                    rd.volumeUp()
+                elif te_ondernemen_actie == "volumeDown":
+                    rd.volumeDown()
+            
+    """
+    
+    """    
     rd = Radio()
     t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co))
     
@@ -55,4 +100,5 @@ def main():
     
     cursor.show()
     rd.stoppen()
+    """
     return 0

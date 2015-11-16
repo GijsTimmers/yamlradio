@@ -15,17 +15,13 @@
 
 ## Moving to container-based infrastructure
 ## Does not work yet with sudo.
-#sudo: false
+sudo: false
 
 ## Setting up the correct language
 language: python
 python: "3.4"
 
 ## Command to install system dependencies
-#before_install:
-#    - sudo apt-get update -qq
-#    - sudo apt-get install python3-pip mplayer2
-
 addons:
   apt:
     packages:
