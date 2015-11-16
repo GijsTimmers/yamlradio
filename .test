@@ -76,16 +76,7 @@ try:
     for combinatie in pa.zenderdict:
         naam = combinatie["naam"]
         url  = combinatie["url"]
-        co = fa.returnCommunicatorObject("default")
-        t = threading.Thread(target=rd.afspelen, args=(naam, url, co))
-        t.start()
-        time.sleep(3)
-        rd.stoppen()
-        t.join()
-        #p = subprocess.Popen(["./yamlradio/yamlradio.py", afk])
-        #time.sleep(3)
-        #p.kill()
-        ok()
+        print("Does not work properly anymore - please get it fixed")
 except Exception as e:
     error()
     print(e.message, e.args)
