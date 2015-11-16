@@ -15,8 +15,6 @@
 ## CA 94042, USA.
 
 import sys
-import time
-
 
 class Communicator(object):
     def __init__(self):

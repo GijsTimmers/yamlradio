@@ -41,7 +41,7 @@ def main():
 
     with Keypress() as kp:
         while t1.isAlive():
-            key = kp.getKeypress(q)
+            kp.getKeypress(q)
             
             if q.empty():
                 time.sleep(0.1)
@@ -55,50 +55,4 @@ def main():
                     rd.volumeUp()
                 elif intent == "volumeDown":
                     rd.volumeDown()
-    
-    """
-    with Keypress() as kp:
-        while t1.isAlive():
-            keypress = kp.getKeypress(q)
-            if q.empty():
-                time.sleep(0.1)
-            else:
-                te_ondernemen_actie = q.get()
-                #print (te_ondernemen_actie)
-                if te_ondernemen_actie == "stop":
-                    q.task_done()
-                    cursor.show()
-                    rd.stoppen()
-                elif te_ondernemen_actie == "volumeUp":
-                    rd.volumeUp()
-                elif te_ondernemen_actie == "volumeDown":
-                    rd.volumeDown()
-            
-    """
-    
-    """    
-    rd = Radio()
-    t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co))
-    
-        
-    with Keypress() as kp:
-        t1.start()
-        while t1.isAlive():
-            keypress = kp.getKeypress()
-            if keypress == "exit":
-                break
-            elif keypress == "volumeUp":
-                rd.volumeUp()
-            elif keypress == "volumeDown":
-                rd.volumeDown()
-            else:
-                pass
-                
-            ## Polling
-            time.sleep(0.1)
-            
-    
-    cursor.show()
-    rd.stoppen()
-    """
     return 0
