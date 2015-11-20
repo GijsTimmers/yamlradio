@@ -49,7 +49,8 @@ class Radio(object):
                 
         for regel in iter(self.stream.stdout.readline, ''):
             ## Omzetten van bytes naar gewone string
-            regel = regel.decode("utf-8") 
+            regel = regel.decode("utf-8", errors='ignore')
+
             #print("\r" + regel)
             ## Per nieuwe entry in stdout.readline wordt door deze loop
             ## gegaan. Als bijvoorbeeld de ICY-info verandert, wordt er
