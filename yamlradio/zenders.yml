@@ -10,7 +10,6 @@
 ## - afk: channel-abbreviation
 ##   naam: Full Radio Station Name      ## Necessary
 ##   url:  http://url-to-radio-stream   ## Necessary
-##   comm: communicatorname             ## Optional
 
 ## Nederland
 - afk:  3fm
@@ -78,6 +77,7 @@
   url : http://82.201.47.68/SublimeFM2
 
 ## België
+## Nederlandstalig
 - afk:  hitfm
   naam: Hit fm
   url:  http://94.23.48.124:8000/;stream/1
@@ -97,7 +97,12 @@
 - afk:  stubru
   naam: Studio Brussel
   url : http://mp3.streampower.be/stubru-high.mp3
-  #comm: stubru
+
+## België
+## Franstalig
+- afk:  purefm
+  naam: Pure FM
+  url:  http://purefm.ice.infomaniak.ch:80/purefm-128
 
 ## Hongarije
 - afk:  risefm
