@@ -48,7 +48,12 @@ Music will start playing automatically, press any of the following keys to exit:
 - <kbd>Enter</kbd>
 - <kbd>Space</kbd>
 
-## Adding other radio stations
+## Requesting radio stations
+You can request for a radio station to be added to `yamlradio`. Open an issue 
+by [clicking this url](https://github.com/GijsTimmers/yamlradio/issues/new?title=Radio+Station+request+for+___RADIO_STATION___).
+Please limit your requests to one station per issue.
+
+## Adding other radio stations yourself
 
 You can replace our fine choices with your own recommendations by creating
 a file in your home directory, called `.yamlradio.yml`. Adhere to the syntax
