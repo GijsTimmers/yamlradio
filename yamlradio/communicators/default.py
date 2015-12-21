@@ -15,18 +15,19 @@
 ## CA 94042, USA.
 
 #import re
+import os
 import sys
 
 class Communicator():
     def __init__(self):
         self.oudeInfo = ""
-        self.BREEDTE_TERMINAL = 80
+        self.BREEDTE_TERMINAL = 79
 
     def processChannelName(self, zender):
-        print "Speelt nu af: [{zender}]".format(zender=zender)
-        
+        print("Speelt nu af: [{zender}]".format(zender=zender))
         ## Huidige radiozender weergeven als terminaltitel.
-        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
+        if os.name == "posix":
+            sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
     
     def checkIfIcyIsNew(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme

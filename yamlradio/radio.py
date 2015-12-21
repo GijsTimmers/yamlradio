@@ -72,7 +72,8 @@ class Radio():
         
     def stoppen(self):
         ## Terminaltitel opnieuw instellen op "Terminal"
-        sys.stdout.write("\x1b]2;Terminal\x07")
+        if os.name == "posix":
+            sys.stdout.write("\x1b]2;Terminal\x07")
         
         ## Stuur de toetsindruk Q naar de stream. mplayer reageert op q
         ## door te stoppen. Bij het stoppen print mplayer "Exiting...". In
