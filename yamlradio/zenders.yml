@@ -36,6 +36,10 @@
   naam: FunX
   url:  http://icecast.omroep.nl/funx-bb-mp3
 
+- afk:  gnr
+  naam: Groot Nieuws Radio
+  url:  http://wms.streampartner.nl:8000/grootnieuwsradio
+
 - afk:  lfm
   naam: L-FM Landerd
   url:  http://85.214.102.86:8000
