@@ -15,24 +15,25 @@
 
 ## Moving to container-based infrastructure
 ## Does not work yet with sudo.
-#sudo: false
+sudo: false
 
 ## Setting up the correct language
 language: python
-python: "2.7"
+python: "3.4"
 
 ## Command to install system dependencies
-before_install:
-    - sudo apt-get update -qq
-    - sudo apt-get install python-pip mplayer
+addons:
+  apt:
+    packages:
+    - mplayer2
+
 
 ## Command to install pip dependencies
 install: 
-    - pip install yamlradio ## installleert ook dependencies van yamlradio
-    - pip install colorama ## enkel ndz voor testen
+    - pip3 install yamlradio ## installleert ook dependencies van yamlradio
 
 ## Actual script
-script: ./.test
+script: ./test.py
 
 ## Please don't spam my inbox
 notifications:

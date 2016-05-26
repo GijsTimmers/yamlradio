@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -20,7 +20,7 @@ import yaml                     ## Configuratie inlezen
 import os                       ## Basislib
 import re                       ## Regex
 
-class Parser():
+class Parser(object):
     def __init__(self):
         ## Zenderdictionary aanmaken
         DEFAULT_YAML = os.path.join(os.path.dirname(__file__), "zenders.yml")
@@ -62,7 +62,7 @@ class Parser():
                     
         return (naam, url, comm)    
     
-    def helpoutput(self, name=None):
+    def helpoutput(self):
         ## We schrijven een eigen helpoutput, omdat die van argparse hier niet
         ## volstaat. De reden:
         ## We willen dat gebruikers "rd 3fm" kunnen schrijven ipv bvb

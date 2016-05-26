@@ -10,7 +10,6 @@
 ## - afk: channel-abbreviation
 ##   naam: Full Radio Station Name      ## Necessary
 ##   url:  http://url-to-radio-stream   ## Necessary
-##   comm: communicatorname             ## Optional
 
 ## Nederland
 - afk:  3fm
@@ -37,6 +36,10 @@
   naam: FunX
   url:  http://icecast.omroep.nl/funx-bb-mp3
 
+- afk:  gnr
+  naam: Groot Nieuws Radio
+  url:  http://wms.streampartner.nl:8000/grootnieuwsradio
+
 - afk:  lfm
   naam: L-FM Landerd
   url:  http://85.214.102.86:8000
@@ -54,16 +57,16 @@
   url : http://icecast.omroep.nl/radio2-bb-mp3
 
 - afk:  r6nl
-  naam: Radio 6 (Nederland)
+  naam: NPO Soul & Jazz - please switch to nposj
+  url : http://icecast.omroep.nl/radio6-bb-mp3
+
+- afk:  nposj
+  naam: NPO Soul & Jazz
   url : http://icecast.omroep.nl/radio6-bb-mp3
 
 - afk:  r6nlel
   naam: Radio 6 Easy Listening (Nederland)
   url:  http://icecast.omroep.nl/radio6-easylistening-bb-mp3
-
-- afk:  r6nljz
-  naam: Radio 6 Jazz (Nederland)
-  url:  http://icecast.omroep.nl/radio6-jazz-bb-mp3
 
 - afk:  skyline
   naam: SkyLine
@@ -78,6 +81,7 @@
   url : http://82.201.47.68/SublimeFM2
 
 ## België
+## Nederlandstalig
 - afk:  hitfm
   naam: Hit fm
   url:  http://94.23.48.124:8000/;stream/1
@@ -97,9 +101,19 @@
 - afk:  stubru
   naam: Studio Brussel
   url : http://mp3.streampower.be/stubru-high.mp3
-  #comm: stubru
+
+## België
+## Franstalig
+- afk:  purefm
+  naam: Pure FM
+  url:  http://purefm.ice.infomaniak.ch:80/purefm-128
 
 ## Hongarije
 - afk:  risefm
   naam: RiseFM
   url : http://risefm2.stereoplayer.hu:8080/risefm_hq
+
+## Curaçao
+- afk:  dolfijn
+  naam: Dolfijn FM
+  url:  http://h2232893.stratoserver.net:8504

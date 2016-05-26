@@ -1,8 +1,11 @@
+[![PyPI version](https://badge.fury.io/py/yamlradio.svg)]
+(http://badge.fury.io/py/yamlradio)
+
 [![Build Status](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master)]
 (https://travis-ci.org/GijsTimmers/yamlradio)
 
-[![PyPI version](https://badge.fury.io/py/yamlradio.svg)]
-(http://badge.fury.io/py/yamlradio)
+[![Code Health](https://landscape.io/github/GijsTimmers/yamlradio/master/landscape.svg?style=flat)]
+(https://landscape.io/github/GijsTimmers/yamlradio/master)
 
 [![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)]
 (https://creativecommons.org/licenses/by-sa/4.0/)
@@ -15,40 +18,19 @@ A small Python script to play various radio stations from a terminal.
 ### Installing via `pip` (recommended)
 
 On Ubuntu:
-    
-    $ sudo apt-get install python-pip mplayer
+
+    $ sudo apt-get install python3-pip mplayer2
 
 On Arch:
-    
-    $ sudo pacman -S python2-pip mplayer
-    
+
+    $ sudo pacman -S python-pip mplayer
+
 After installing `pip`, use it to install `yamlradio`:
 
-    $ sudo pip install yamlradio
+    $ sudo pip3 install yamlradio
 
 You don't need to mind the dependencies as they will be installed automatically.
 
-### Installing via `git clone`
-
-First, install the dependencies:
-
-- `git`
-- `pip`
-- `mplayer`
-- `argparse`
-- `argcomplete`
-- `pyYAML`
-- `py-getch`
-- `cursor`
-
-Afterwards, clone `yamlradio`:
-
-    $ git clone https://github.com/GijsTimmers/yamlradio.git
-
-Now run `yamlradio.py`:
-
-    $ cd yamlradio
-    $ ./yamlradio-runner.py [channel_abbreviation]
 
 ## Usage
 
@@ -61,67 +43,28 @@ e.g.
 
 Music will start playing automatically, press any of the following keys to exit:
 
-- <kbd>Enter</kbd>
 - <kbd>q</kbd>
 - <kbd>Esc</kbd>
-- <kbd>Ctrl</kbd> + <kbd>c</kbd>
+- <kbd>Enter</kbd>
+- <kbd>Space</kbd>
 
-## Adding other radio stations
+## Requesting radio stations
+You can request for a radio station to be added to `yamlradio`. Open an issue 
+by [clicking this url](https://github.com/GijsTimmers/yamlradio/issues/new?title=Radio+Station+request+for+___RADIO_STATION___).
+Please limit your requests to one station per issue.
+
+## Adding other radio stations yourself
 
 You can replace our fine choices with your own recommendations by creating
 a file in your home directory, called `.yamlradio.yml`. Adhere to the syntax
 defined in [`zenders.yml`](yamlradio/zenders.yml), otherwise you may run into 
 some problems.
 
-## Autocompleting radio stations in `zsh`
-`yamlradio` is made so that channels can be autocompleted in `zsh`. This feature
-may come in handy:
+## Advanced usage
 
-    $ rd st      ## Now press the TAB key
-    $ rd stubru  ## Result
-    
-For this to work, execute the following commands
+I try to provide tech-savvy users with the right tools to customise `yamlradio`
+to their likings. Some things you can do:
 
-    $ activate-global-python-argcomplete --user
-    
-Now, add the following lines at the end of your `~/.zshrc`:
-
-    ## Setting up argcomplete
-    ## Remember to execute
-    ## activate-global-python-argcomplete --user
-    ## first!
-
-    autoload bashcompinit
-    bashcompinit
-    source ~/.bash_completion.d/python-argcomplete.sh
-
-    ## now name the to be completed scripts
-    eval "$(register-python-argcomplete `which rd`)"
-
-Then, source the configuration to apply it:
-
-    $ source ~/.zshrc
-
-If the command `activate-global-python-argcomplete --user` fails, make sure that
-you have `argcomplete` installed. If you install `yamlradio` with `pip`, 
-`argcomplete` gets installed automatically.
-
-## Adding custom communicators
-
-If you think the display of ICY information can be improved, you can write
-custom communicators for your channel in the directory `communicators/`. 
-Make sure the file name is the same as the channel's abbreviation, ending with
-`.py`. If the channel's abbreviation starts with a digit, start the filename
-with an underscore (`_`). For example:
-
-- the communicator for `Studio Brussel` is `stubru.py`
-- the communicator for `Radio 538` is `_538.py`
-
-There are two methods at your disposal:
-
-- `processChannelName(self, zender)`, which gets called just before playing
-the radio station, with `zender` being the channel name. Edit this method to 
-change the way the channel name is displayed.
-- `processIcy(self, regel)`, which gets called every time the radio station
-sends new information via a ICY string, with `regel` being the sent string. Edit
-this method to change the way the ICY information is displayed.
+- [Install with `git` instead of `pip`](https://github.com/GijsTimmers/yamlradio/wiki/Installing-via-git)
+- [Change the way data is shown for radio stations](https://github.com/GijsTimmers/yamlradio/wiki/Adding-custom-communicators)
+- [Autocomplete radio stations in `zsh`](https://github.com/GijsTimmers/yamlradio/wiki/Autocompleting-radio-stations-in-zsh)

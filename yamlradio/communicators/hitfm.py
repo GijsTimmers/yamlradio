@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -14,7 +14,7 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-import _538                     ## Superklasse
+from . import _538              ## Superklasse
 
 class Communicator(_538.Communicator):
     ## Alle eigenschappen van de Radio 538-communicator overnemen

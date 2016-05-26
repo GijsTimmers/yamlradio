@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -22,27 +22,37 @@ from .radio import Radio
 import threading                ## Voor multithreading
 import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
-import re                       ## Regex
+
+import queue
 
 def main():
     pa = Parser()
     naam, url, comm = pa.zendervinden()
-    #print naam, url, comm
+    
     cursor.hide()
     
     fa = Fabriek()
     co = fa.returnCommunicatorObject(comm)
-        
+    
     rd = Radio()
-    t = threading.Thread(target=rd.afspelen, args=(naam, url, co))
-    t.start()
-    
-    ## Afspelen stoppen na drukken op één van de EXITKEYS
-    kp = Keypress()
-    while kp.getexitkeypress() == False:
-        time.sleep(0.2)
-    
-    cursor.show()
-    rd.stoppen()
-    
+    q  = queue.Queue()
+    t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co, q))
+    t1.start()
+
+    with Keypress() as kp:
+        while t1.isAlive():
+            kp.getKeypress(q)
+            
+            if q.empty():
+                time.sleep(0.1)
+            else:
+                intent = q.get()
+                if intent == "stop":
+                    q.task_done()
+                    cursor.show()
+                    rd.stoppen()
+                elif intent == "volumeUp":
+                    rd.volumeUp()
+                elif intent == "volumeDown":
+                    rd.volumeDown()
     return 0
