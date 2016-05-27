@@ -14,8 +14,8 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-
-    
+import os
+   
 class UnixEnvironment(object):
     def __enter__(self):
         ## doing some 'scary' terminal stuff so that stdin is non-blocking
@@ -46,15 +46,15 @@ class UnixKeypress(object):
         KEY_PLUS     = "+"
         KEY_EQUALS   = "="
         
-        BYTE_0        = "0"
-        BYTE_PLUS     = "+"
-        BYTE_EQUALS   = "="
+        BYTE_0        = b"0"
+        BYTE_PLUS     = b"+"
+        BYTE_EQUALS   = b"="
         
         KEY_9        = "9"
         KEY_MINUS    = "-"
         
-        BYTE_9        = "9"
-        BYTE_MINUS    = "-"
+        BYTE_9        = b"9"
+        BYTE_MINUS    = b"-"
         
         self.EXITKEYS = set([
                              KEY_LOWER_Q,
@@ -125,41 +125,18 @@ class WindowsKeypress(UnixKeypress):
                 q.put("volumeDown")
             else:
                 pass
-        """
-        num = 0
-        done = False
-        while not done:
-            print(num)
-            num += 1
 
-            if msvcrt.kbhit():
-                print("you pressed",msvcrt.getch(),"so now i will quit")
-                done = True
-        """
 
-    
-    
-
-import os
-import msvcrt
-"""
 if os.name == "posix":
     import tty                      ## Necessary stuff for logging keypresses
     import sys                      ## Necessary stuff for logging keypresses
     import select                   ## Necessary stuff for logging keypresses
     import termios                  ## Necessary stuff for logging keypresses
-    
+    Environment = UnixEnvironment()
     Keypress = UnixKeypress()
-"""
 
-Environment = WindowsEnvironment
-Keypress = WindowsKeypress
-#class Keypress(WindowsKeypress):
-#   pass
-    
-
-"""
 elif os.name == "nt":
-    class Keypress(WindowsKeypress):
-        pass
-"""
+    import os
+    import msvcrt
+    Environment = WindowsEnvironment
+    Keypress = WindowsKeypress

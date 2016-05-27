@@ -54,8 +54,10 @@ class Communicator(object):
     
     def processVolumeUp(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
+        #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
+        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ^"))
     
     def processVolumeDown(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))
+        #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))
+        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume v"))
