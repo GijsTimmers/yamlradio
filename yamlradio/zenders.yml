@@ -64,10 +64,6 @@
   naam: NPO Soul & Jazz
   url : http://icecast.omroep.nl/radio6-bb-mp3
 
-- afk:  r6nlel
-  naam: Radio 6 Easy Listening (Nederland)
-  url:  http://icecast.omroep.nl/radio6-easylistening-bb-mp3
-
 - afk:  skyline
   naam: SkyLine
   url:  http://icecast.streamonecloud.net/zz5giI7VF5B6

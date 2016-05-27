@@ -17,6 +17,7 @@
 #import re
 import os
 import sys
+import subprocess
 
 class Communicator(object):
     def __init__(self):
@@ -28,6 +29,10 @@ class Communicator(object):
         ## Huidige radiozender weergeven als terminaltitel.
         if os.name == "posix":
             sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
+        elif os.name == "nt":
+            import ctypes
+            ctypes.windll.kernel32.SetConsoleTitleA(zender.encode())
+            
     
     def checkIfIcyIsNew(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme
@@ -47,6 +52,7 @@ class Communicator(object):
         regel = self.checkIfIcyIsNew(regel)
         if regel:  
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+            #sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
             sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
@@ -55,9 +61,9 @@ class Communicator(object):
     def processVolumeUp(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
         #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ^"))
+        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume \x18")) ## werkt op Windows
     
     def processVolumeDown(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
         #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume v"))
+        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume \x19")) ## werkt op Windows
