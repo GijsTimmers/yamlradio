@@ -61,9 +61,12 @@ class Communicator(object):
     def processVolumeUp(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
         #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
+        ## TODO: make arrow-up display correctly both on Windows and Linux
         sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume \x18")) ## werkt op Windows
+        
     
     def processVolumeDown(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
         #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))
+        ## TODO: make arrow-down display correctly both on Windows and Linux
         sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume \x19")) ## werkt op Windows
