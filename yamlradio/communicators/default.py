@@ -23,7 +23,15 @@ class Communicator(object):
     def __init__(self):
         self.oudeInfo = ""
         self.BREEDTE_TERMINAL = 79
-
+        
+        if os.name == "posix":
+            self.arrow_up_sign   = "↑"
+            self.arrow_down_sign = "↓"
+        
+        if os.name == "nt":
+            self.arrow_up_sign   = "\x18"
+            self.arrow_down_sign = "\x19"
+        
     def processChannelName(self, zender):
         print("Speelt nu af: [{zender}]".format(zender=zender))
         ## Huidige radiozender weergeven als terminaltitel.
@@ -60,10 +68,8 @@ class Communicator(object):
     
     def processVolumeUp(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume \x18")) ## werkt op Windows
+        sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_up_sign))
     
     def processVolumeDown(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        #sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume \x19")) ## werkt op Windows
+        sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_down_sign))
