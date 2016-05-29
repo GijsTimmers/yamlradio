@@ -132,8 +132,8 @@ if os.name == "posix":
     import sys                      ## Necessary stuff for logging keypresses
     import select                   ## Necessary stuff for logging keypresses
     import termios                  ## Necessary stuff for logging keypresses
-    Environment = UnixEnvironment()
-    Keypress = UnixKeypress()
+    Environment = UnixEnvironment
+    Keypress = UnixKeypress
 
 elif os.name == "nt":
     import os
