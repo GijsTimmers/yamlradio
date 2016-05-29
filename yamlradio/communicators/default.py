@@ -14,18 +14,33 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
+#import re
+import os
 import sys
+import subprocess
 
 class Communicator(object):
     def __init__(self):
         self.oudeInfo = ""
-        self.BREEDTE_TERMINAL = 80
-
+        self.BREEDTE_TERMINAL = 79
+        
+        if os.name == "posix":
+            self.arrow_up_sign   = "↑"
+            self.arrow_down_sign = "↓"
+        
+        if os.name == "nt":
+            self.arrow_up_sign   = "\x18"
+            self.arrow_down_sign = "\x19"
+        
     def processChannelName(self, zender):
         print("Speelt nu af: [{zender}]".format(zender=zender))
-        
         ## Huidige radiozender weergeven als terminaltitel.
-        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
+        if os.name == "posix":
+            sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
+        elif os.name == "nt":
+            import ctypes
+            ctypes.windll.kernel32.SetConsoleTitleA(zender.encode())
+            
     
     def checkIfIcyIsNew(self, regel):
         ## Het oudeInfo/nieuweInfo-mechanisme
@@ -45,6 +60,7 @@ class Communicator(object):
         regel = self.checkIfIcyIsNew(regel)
         if regel:  
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+            #sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
             sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
@@ -52,8 +68,8 @@ class Communicator(object):
     
     def processVolumeUp(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↑"))
+        sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_up_sign))
     
     def processVolumeDown(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        sys.stdout.write("\r" + "Info:         [{info}]".format(info="Volume ↓"))
+        sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_down_sign))

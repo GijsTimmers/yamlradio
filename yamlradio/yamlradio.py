@@ -14,7 +14,7 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-from .keypress import Keypress
+from .keypress import Environment, Keypress
 from .fabriek import Fabriek
 from .parser import Parser
 from .radio import Radio
@@ -38,8 +38,9 @@ def main():
     q  = queue.Queue()
     t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co, q))
     t1.start()
-
-    with Keypress() as kp:
+    
+    with Environment():
+        kp = Keypress()
         while t1.isAlive():
             kp.getKeypress(q)
             
