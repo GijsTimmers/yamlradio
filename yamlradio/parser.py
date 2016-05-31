@@ -46,12 +46,20 @@ class Parser(object):
         self.parser = argparse.ArgumentParser(usage=self.helpoutput(), add_help=False)
         self.parser.add_argument('zender', choices=self.afkortingenlijst, help="hulp hier")
         
-    def zendervinden(self):
+    def zendervinden(self, *afk):
+        ## Als yamlradio als module wordt aangeroepen, bestaat afk.
+        ## Als yamlradio als programma wordt aangeroepen, bestaat afk nog
+        ## niet en moet die worden geparst uit de command-line-arguments
+        if afk:
+            afk = afk[0]
+        else:
+            argcomplete.autocomplete(self.parser)
+            argumenten = self.parser.parse_args()
+            afk = argumenten.zender
+        
         ## De ingevoerde argumenten parsen
-        argcomplete.autocomplete(self.parser)
-        argumenten = self.parser.parse_args()
         for combinatie in self.zenderdict:
-            if combinatie["afk"] == argumenten.zender:
+            if combinatie["afk"] == afk:
                 naam = combinatie["naam"]
                 url  = combinatie["url"]
                 

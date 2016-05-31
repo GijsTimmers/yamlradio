@@ -25,9 +25,12 @@ import time                     ## Polling voor opvangen keypress
 
 import queue
 
-def main():
-    pa = Parser()
-    naam, url, comm = pa.zendervinden()
+def main(*afk):
+    pa = Parser()                   
+    
+    ## *afk: indien yamlradio wordt aangeroepen
+    ## als module ipv als programma.
+    naam, url, comm = pa.zendervinden(*afk)
     
     cursor.hide()
     
