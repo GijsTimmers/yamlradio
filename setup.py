@@ -7,7 +7,7 @@ try:
     setup(
     name = "yamlradio",
     packages = ["yamlradio"],
-    version = "2.1.1",
+    version = "2.1.2",
     description = "A small Python3 package to play radio stations as defined in a YAML file.",
     author = "Gijs Timmers",
     author_email = "gijs.timmers@student.kuleuven.be",
