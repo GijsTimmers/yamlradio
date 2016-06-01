@@ -22,7 +22,7 @@ from .radio import Radio
 import threading                ## Voor multithreading
 import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
-
+import sys
 import queue
 
 def main(*afk):
@@ -55,6 +55,8 @@ def main(*afk):
                     q.task_done()
                     cursor.show()
                     rd.stoppen()
+                    ## prompt op een nieuwe regel starten
+                    sys.stdout.write("\n")
                 elif intent == "volumeUp":
                     rd.volumeUp()
                 elif intent == "volumeDown":

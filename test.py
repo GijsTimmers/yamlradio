@@ -1,25 +1,22 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# PYTHON_ARGCOMPLETE_OK
 
-## Dependencies:    mplayer, argparse, argcomplete, pyYAML
-## Author:          Gijs Timmers: https://github.com/GijsTimmers
-
-## Licence:         CC-BY-SA-4.0
-##                  http://creativecommons.org/licenses/by-sa/4.0/
-
-## This work is licensed under the Creative Commons
-## Attribution-ShareAlike 4.0 International License. To  view a copy of
-## this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or
-## send a letter to Creative Commons, PO Box 1866, Mountain View,
-## CA 94042, USA.
-
-import subprocess
 import yaml
 import os
+import queue
 import time
+import threading
+
+import yamlradio.fabriek
+import yamlradio.yamlradio
+import yamlradio.keypress
+import yamlradio.parser
+import yamlradio.radio
 
 def main():
+    pa = yamlradio.parser.Parser()
+    rd = yamlradio.radio.Radio()
+    fa = yamlradio.fabriek.Fabriek()
+
     loaded_yaml = os.path.join(os.path.dirname(__file__), "./yamlradio/zenders.yml")
     
     with open(loaded_yaml, "r") as f:
@@ -28,13 +25,20 @@ def main():
         for combinatie in zenderdict]
 
         for afk in afkortingenlijst:
-            cmd = ["rd", afk]
-            print("$ " + " ".join(cmd))
-            p = subprocess.Popen(cmd)
+            naam, url, comm = pa.zendervinden(afk)
+            #print(naam, url, comm)
+            co = fa.returnCommunicatorObject(comm)
+            q = queue.Queue()
+            t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co, q))
+            t1.start()
             time.sleep(3)
-            p.kill()
+            rd.stoppen()
             print("\n")
+
+        
 
 
 if __name__ == "__main__":
     main()
+
+

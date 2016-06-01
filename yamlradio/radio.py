@@ -75,8 +75,6 @@ class Radio(object):
                 break                
             
             elif re.match("^Exiting...", regel):
-                ## Op een nieuwe regel starten
-                sys.stdout.write("\n")
                 break
                 
         return()
