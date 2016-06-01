@@ -56,10 +56,6 @@
   naam: Radio 2 (Nederland)
   url : http://icecast.omroep.nl/radio2-bb-mp3
 
-- afk:  r6nl
-  naam: NPO Soul & Jazz - please switch to nposj
-  url : http://icecast.omroep.nl/radio6-bb-mp3
-
 - afk:  nposj
   naam: NPO Soul & Jazz
   url : http://icecast.omroep.nl/radio6-bb-mp3
