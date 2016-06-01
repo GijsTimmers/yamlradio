@@ -28,7 +28,7 @@
   naam: BNR Nieuwsradio
   url:  http://icecast-bnr.cdp.triple-it.nl/bnr_mp3_128_03
 
-- afk:  decibel
+- afk:  dec
   naam: Radio Decibel
   url:  http://91.221.151.253:80
 
@@ -44,7 +44,7 @@
   naam: L-FM Landerd
   url:  http://85.214.102.86:8000
 
-- afk:  pinguin
+- afk:  ping
   naam: Pinguin Radio
   url:  http://pr320.pinguinradio.com:80
 
@@ -60,7 +60,7 @@
   naam: NPO Soul & Jazz
   url : http://icecast.omroep.nl/radio6-bb-mp3
 
-- afk:  skyline
+- afk:  skyl
   naam: SkyLine
   url:  http://icecast.streamonecloud.net/zz5giI7VF5B6
 
@@ -68,7 +68,7 @@
   naam: SLAM!
   url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
     
-- afk:  sublimefm
+- afk:  subl
   naam: Sublime FM
   url : http://stream01.sublimefm.nl/SublimeFM_mp3
 
@@ -78,7 +78,7 @@
   naam: Hit fm
   url:  http://94.23.48.124:8000/;stream/1
   
-- afk:  humorzender
+- afk:  humor
   naam: Humorzender - Vlaanderen Lacht
   url:  http://streaming.radionomy.com/humorzender
 
