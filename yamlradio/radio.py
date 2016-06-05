@@ -80,15 +80,13 @@ class Radio(object):
         return()
             
     def volumeUp(self):
-        ## raise volume by 4 steps: emulates user pressing on 0 for 4 times
-        self.stream.stdin.write(b"000")
+        self.stream.stdin.write(b"0")
         self.stream.stdin.flush()
         
         self.co.processVolumeUp()
         
     def volumeDown(self):
-        ## lower volume by 4 steps: emulates user pressing on 9 for 4 times
-        self.stream.stdin.write(b"99999")
+        self.stream.stdin.write(b"9")
         self.stream.stdin.flush()
         
         self.co.processVolumeDown()
