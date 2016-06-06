@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 from setuptools import setup, find_packages
 import sys
+import os
+
+
+def check_requirements():
+    assert sys.version_info >= (3, 4), "Please use Python 3.4 or higher."
+    if os.name == "posix":
+        assert os.geteuid() == 0, "Please run with root privileges."
 
 try:
-    assert sys.version_info >= (3, 4)
+    check_requirements()
     setup(
     name = "yamlradio",
     packages = ["yamlradio"],
@@ -19,5 +26,5 @@ try:
           'console_scripts': ['rd=yamlradio:rd']},
     include_package_data = True
     )
-except AssertionError:
-    print("Please use Python 3.4 or higher.")
+except AssertionError as e:
+    print(e)
