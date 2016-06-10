@@ -23,7 +23,7 @@ try:
     install_requires = ["argparse", "argcomplete", "pyYAML", "cursor"],
     classifiers = [],
     entry_points = {
-          'console_scripts': ['rd=yamlradio:rd']},
+          "console_scripts": ["yamlradio=yamlradio:rd", "rd=yamlradio:rd"]},
     include_package_data = True
     )
 except AssertionError as e:
