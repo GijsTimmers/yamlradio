@@ -73,17 +73,17 @@ class Parser(object):
     def helpoutput(self):
         ## We schrijven een eigen helpoutput, omdat die van argparse hier niet
         ## volstaat. De reden:
-        ## We willen dat gebruikers "rd 3fm" kunnen schrijven ipv bvb
-        ## "rd --3fm";
+        ## We willen dat gebruikers "yamlradio 3fm" kunnen schrijven ipv bvb
+        ## "yamlradio --3fm";
         ## De afwezigheid van streepjes impliceert een positioneel argument,
         ## ipv een optioneel argument;
         ## Daarom moeten we werken met één argument, genaamd "zender", welke
         ## meerdere keuzes heeft (de lijst van zenders);
-        ## Dat leidt tot een kleine helpoutput, iets als "rd zender {}" met
-        ## tussen de accolades alle mogelijke zenderafkortingen.
+        ## Dat leidt tot een kleine helpoutput, iets als "yamlradio
+        ## zender {}" met tussen de accolades alle mogelijke zenderafkortingen.
         SPACING = 2
         
-        text = "rd [channel_abbreviation]\n" + \
+        text = "yamlradio [channel_abbreviation]\n" + \
         "available channels:\n"
         abbreviation_column_width = max([len(afk) for afk in self.afkortingenlijst]) + SPACING
         
