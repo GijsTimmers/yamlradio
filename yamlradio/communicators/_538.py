@@ -18,18 +18,19 @@ from . import default           ## Superklasse
 import sys                      ## Basislib
 
 class Communicator(default.Communicator):
-    def processIcy(self, regel):
-        regel = self.checkIfIcyIsNew(regel)
-        if regel:  
-            if " - " in regel:
-                ## Als er een liedje wordt afgespeeld (gekenmerkt door het
-                ## streepje), wordt de string omgezet in kleine letters, be-
-                ## ginnend met een hoofdletter.
-                regel = regel.title()
+    def processIcy(self, icy_streamtitle):
+        ## Ontvangen ICY-tekst doorgeven aan checkIfIcyIsNew() om te kijken of
+        ## ze nieuw is. Indien ze hetzelfde is, gebeurt er niks.
+    
+        self.nieuwe_icy_streamtitle = icy_streamtitle
+        
+        if self.nieuwe_icy_streamtitle:
+            if " - " in self.nieuwe_icy_streamtitle:
+                self.nieuwe_icy_streamtitle = self.nieuwe_icy_streamtitle.title()
+            if self.nieuwe_icy_streamtitle != self.oude_icy_streamtitle:
                 sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-                sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
-            
-            else:
-                sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-                sys.stdout.write("\r" + "Info:         [{info}]".
-                format(info=regel))
+                sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuwe_icy_streamtitle))
+        else:
+            sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+            sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=self.nieuwe_icy_streamtitle))
+    

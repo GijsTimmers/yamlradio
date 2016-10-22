@@ -36,6 +36,14 @@
   naam: FunX
   url:  http://icecast.omroep.nl/funx-bb-mp3
 
+- afk:  funxlat
+  naam: FunX Latin
+  url:  http://icecast.omroep.nl/funx-latin-bb-mp3
+
+- afk:  funxhh
+  naam: FunX Hiphop
+  url:  http://icecast.omroep.nl/funx-hiphop-bb-mp3
+
 - afk:  gnr
   naam: Groot Nieuws Radio
   url:  http://wms.streampartner.nl:8000/grootnieuwsradio

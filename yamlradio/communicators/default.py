@@ -14,14 +14,13 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-#import re
 import os
 import sys
 import subprocess
 
 class Communicator(object):
     def __init__(self):
-        self.oudeInfo = ""
+        self.oude_icy_streamtitle = ""
         self.BREEDTE_TERMINAL = 79
         
         if os.name == "posix":
@@ -53,18 +52,19 @@ class Communicator(object):
             self.oudeInfo = self.nieuweInfo
             return self.nieuweInfo
             
-    def processIcy(self, regel):
+    def processIcy(self, icy_streamtitle):
         ## Ontvangen ICY-tekst doorgeven aan checkIfIcyIsNew() om te kijken of
         ## ze nieuw is. Indien ze hetzelfde is, gebeurt er niks.
         
-        regel = self.checkIfIcyIsNew(regel)
-        if regel:  
-            sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-            #sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
-            sys.stdout.write("\r" + "Info:         [{info}]".format(info=regel))
+        self.nieuwe_icy_streamtitle = icy_streamtitle
+        
+        if self.nieuwe_icy_streamtitle:
+            if self.nieuwe_icy_streamtitle != self.oude_icy_streamtitle:
+                sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
+                sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuwe_icy_streamtitle))
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-            sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=regel))
+            sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=self.nieuwe_icy_streamtitle))
     
     def processVolumeUp(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
@@ -73,3 +73,8 @@ class Communicator(object):
     def processVolumeDown(self):
         sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
         sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_down_sign))
+    
+    def restoreTerminalTitle(self):
+        ## Terminaltitel opnieuw instellen op "Terminal"
+        if os.name == "posix":
+            sys.stdout.write("\x1b]2;Terminal\x07")

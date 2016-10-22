@@ -19,46 +19,52 @@ from .fabriek import Fabriek
 from .parser import Parser
 from .radio import Radio
 
-import threading                ## Voor multithreading
+import icyparser                ## Parses ICY messages in Icecast streams
 import cursor                   ## Cursor tonen/verbergen
 import time                     ## Polling voor opvangen keypress
-import sys
 import queue
 
 def main(*afk):
-    pa = Parser()                   
-    
     ## *afk: indien yamlradio wordt aangeroepen
     ## als module ipv als programma.
-    naam, url, comm = pa.zendervinden(*afk)
     
     cursor.hide()
+    pa = Parser()                   
+    naam, url, comm = pa.zendervinden(*afk)
     
     fa = Fabriek()
     co = fa.returnCommunicatorObject(comm)
-    
     rd = Radio()
     q  = queue.Queue()
-    t1 = threading.Thread(target=rd.afspelen, args=(naam, url, co, q))
-    t1.start()
+    rd.afspelen(url)
+    co.processChannelName(naam)
+    ## Loop: checks for keypresses and updated ICY info.
     
-    with Environment():
-        kp = Keypress()
-        while t1.isAlive():
-            kp.getKeypress(q)
-            
+    kp = Keypress()
+    ip = icyparser.IcyParser()
+    ip.getIcyInformation(url)
+    
+    with Environment():    
+        while True:
+            kp.getKeypress(q)        
             if q.empty():
+                co.processIcy(ip.icy_streamtitle)
+                #print(rd.stream.stdout.readline())
                 time.sleep(0.1)
             else:
                 intent = q.get()
                 if intent == "stop":
-                    q.task_done()
-                    cursor.show()
-                    rd.stoppen()
-                    ## prompt op een nieuwe regel starten
-                    sys.stdout.write("\n")
+                    break
                 elif intent == "volumeUp":
+                    co.processVolumeUp()
                     rd.volumeUp()
+                    
                 elif intent == "volumeDown":
+                    co.processVolumeDown()
                     rd.volumeDown()
-    return 0
+                    
+    ip.stop()
+    rd.stoppen()
+    co.restoreTerminalTitle()
+    print("")
+    cursor.show()

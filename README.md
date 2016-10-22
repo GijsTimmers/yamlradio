@@ -34,12 +34,12 @@ You don't need to mind the dependencies as they will be installed automatically.
 
 ## Usage
 
-    $ rd <CHANNEL-ABBREVIATION>
+    $ yamlradio <CHANNEL-ABBREVIATION>
 
 e.g.
 
-    $ rd r2nl
-    $ rd stubru
+    $ yamlradio r2nl
+    $ yamlradio stubru
 
 Music will start playing automatically, press any of the following keys to exit:
 
