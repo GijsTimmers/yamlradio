@@ -36,6 +36,10 @@
   naam: FunX
   url:  http://icecast.omroep.nl/funx-bb-mp3
 
+- afk:  funxar
+  naam: FunX Arab
+  url:  http://icecast.omroep.nl/funx-arab-bb-mp3
+
 - afk:  funxlat
   naam: FunX Latin
   url:  http://icecast.omroep.nl/funx-latin-bb-mp3
@@ -117,4 +121,9 @@
 - afk:  dolfijn
   naam: Dolfijn FM
   url:  http://85.214.231.253:8080/stream.mp3
+
+## Zwitserland
+- afk:  swiss
+  naam: Radio Swiss Jazz
+  url:  http://stream.srg-ssr.ch/m/rsj/aacp_96
 

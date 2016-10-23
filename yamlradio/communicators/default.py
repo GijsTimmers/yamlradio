@@ -16,7 +16,6 @@
 
 import os
 import sys
-import subprocess
 
 class Communicator(object):
     def __init__(self):
@@ -39,18 +38,6 @@ class Communicator(object):
         elif os.name == "nt":
             import ctypes
             ctypes.windll.kernel32.SetConsoleTitleA(zender.encode())
-            
-    
-    def checkIfIcyIsNew(self, regel):
-        ## Het oudeInfo/nieuweInfo-mechanisme
-        ## is een mechanisme om iedere keer alleen het nieuwste ICY-bericht
-        ## in het leesvenster te plaatsen.
-        self.nieuweInfo = regel
-        if self.nieuweInfo == self.oudeInfo:
-            return None
-        else:
-            self.oudeInfo = self.nieuweInfo
-            return self.nieuweInfo
             
     def processIcy(self, icy_streamtitle):
         ## Ontvangen ICY-tekst doorgeven aan checkIfIcyIsNew() om te kijken of

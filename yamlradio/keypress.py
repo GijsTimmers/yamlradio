@@ -136,7 +136,6 @@ if os.name == "posix":
     Keypress = UnixKeypress
 
 elif os.name == "nt":
-    import os
     import msvcrt
     Environment = WindowsEnvironment
     Keypress = WindowsKeypress

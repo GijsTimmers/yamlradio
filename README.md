@@ -7,10 +7,6 @@
 [![Code Health](https://landscape.io/github/GijsTimmers/yamlradio/master/landscape.svg?style=flat)]
 (https://landscape.io/github/GijsTimmers/yamlradio/master)
 
-[![cc-logo](https://licensebuttons.net/l/by-sa/4.0/88x31.png)]
-(https://creativecommons.org/licenses/by-sa/4.0/)
-
-
 # yamlradio
 A small Python script to play various radio stations from a terminal.
 
