@@ -35,7 +35,7 @@ class Communicator(default.Communicator):
                 self.nieuwe_icy_streamtitle = self.nieuwe_icy_streamtitle.title()
             if self.nieuwe_icy_streamtitle != self.oude_icy_streamtitle:
                 sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-                sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuwe_icy_streamtitle))
+                sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuwe_icy_streamtitle[0:64]))
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
             sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=self.nieuwe_icy_streamtitle))
