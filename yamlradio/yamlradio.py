@@ -28,9 +28,9 @@ def main(*afk):
     ## *afk: indien yamlradio wordt aangeroepen
     ## als module ipv als programma.
     
-    cursor.hide()
     pa = Parser()                   
     naam, url, comm = pa.zendervinden(*afk)
+    cursor.hide()
     
     fa = Fabriek()
     co = fa.returnCommunicatorObject(comm)
