@@ -13,26 +13,22 @@
 ## send a letter to Creative Commons, PO Box 1866, Mountain View,
 ## CA 94042, USA.
 
-## Moving to container-based infrastructure
-## Does not work yet with sudo.
-sudo: false
-
 ## Setting up the correct language
 language: python
 python: "3.6"
 
 ## Command to install system dependencies
-addons:
-  apt:
-    packages:
-    - mpv
+#addons:
+  #apt:
+    #packages:
+    #- mpv
 
 
 ## Command to install pip dependencies
 install: 
-    - pip install --user -U pip
+    - pip install .
     - pip install --user -r requirements.txt
-    - python setup.py install
+    #- python setup.py install
 
 ## Actual script
 script: ./test.py
