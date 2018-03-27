@@ -16,11 +16,14 @@
 
 import os
 import sys
+import shutil
 
 class Communicator(object):
     def __init__(self):
         self.oude_icy_streamtitle = ""
-        self.BREEDTE_TERMINAL = 79
+
+        self.BREEDTE_TERMINAL = shutil.get_terminal_size((80, 20))[0]
+        self.toegestane_lengte_infotekst = self.BREEDTE_TERMINAL - 16
         
     def processChannelName(self, zender):
         print("Speelt nu af: [{zender}]".format(zender=zender))
@@ -37,7 +40,7 @@ class Communicator(object):
             if self.nieuwe_icy_streamtitle != self.oude_icy_streamtitle:
                 sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
                 sys.stdout.write("\r" + "Info:         [{info}]".
-                        format(info=self.nieuwe_icy_streamtitle[0:64]))
+                        format(info=self.nieuwe_icy_streamtitle[0:self.toegestane_lengte_infotekst]))
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
             sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".
