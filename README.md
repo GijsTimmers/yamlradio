@@ -1,11 +1,6 @@
-[![PyPI version](https://badge.fury.io/py/yamlradio.svg)]
-(http://badge.fury.io/py/yamlradio)
-
-[![Build Status](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master)]
-(https://travis-ci.org/GijsTimmers/yamlradio)
-
-[![Code Health](https://landscape.io/github/GijsTimmers/yamlradio/master/landscape.svg?style=flat)]
-(https://landscape.io/github/GijsTimmers/yamlradio/master)
+![pypi](https://badge.fury.io/py/yamlradio.svg) 
+![travis](https://travis-ci.org/GijsTimmers/yamlradio.svg?branch=master) 
+![health](https://landscape.io/github/GijsTimmers/yamlradio/master/landscape.svg?style=flat)
 
 # yamlradio
 A small Python script to play various radio stations from a terminal.

@@ -104,32 +104,5 @@ class UnixKeypress(object):
                 pass
         return False
 
-class WindowsEnvironment(object):
-    def __enter__(self):
-        #print("enter...")
-        pass
-    def __exit__(self, type, value, traceback):
-        #print("exit...")
-        pass
-
-class WindowsKeypress(UnixKeypress):
-    def __init__(self):
-        super().__init__()
-        #print(self.EXITKEYS)
-        #self.EXITKEYS = super().EXITKEYS
-        
-    def getKeypress(self, q):
-        if msvcrt.kbhit():
-            keypress = msvcrt.getch()
-            #print(keypress)
-            if keypress in self.EXITKEYS:
-                q.put("stop")
-            if keypress in self.VOLUMEUPKEYS:
-                q.put("volumeUp")
-            if keypress in self.VOLUMEDOWNKEYS:
-                q.put("volumeDown")
-            else:
-                pass
-
 Environment = UnixEnvironment
 Keypress = UnixKeypress

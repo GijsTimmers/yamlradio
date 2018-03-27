@@ -49,7 +49,7 @@ def main(*afk):
             kp.getKeypress(q)        
             if q.empty():
                 co.processIcy(ip.icy_streamtitle)
-                time.sleep(0.1)
+                time.sleep(0.5)
             else:
                 intent = q.get()
                 if intent == "stop":
