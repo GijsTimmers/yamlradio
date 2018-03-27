@@ -25,12 +25,12 @@ python: "3.4"
 addons:
   apt:
     packages:
-    - mplayer2
+    - mpv
 
 
 ## Command to install pip dependencies
 install: 
-    - pip3 install yamlradio ## installleert ook dependencies van yamlradio
+    - pip3 install argparse argcomplete pyYAML cursor icyparser
 
 ## Actual script
 script: ./test.py

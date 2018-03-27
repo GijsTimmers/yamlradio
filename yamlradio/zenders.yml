@@ -18,11 +18,11 @@
 
 - afk:  "538"
   naam: Radio 538
-  url : http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3
+  url: http://18973.live.streamtheworld.com/RADIO538.mp3
 
 - afk:  "538ib"
   naam: 538 Ibiza
-  url:  http://vip-icecast.538.lw.triple-it.nl/WEB19_MP3
+  url: http://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR19.mp3
 
 - afk:  bnr
   naam: BNR Nieuwsradio
@@ -50,7 +50,7 @@
 
 - afk:  gnr
   naam: Groot Nieuws Radio
-  url:  http://wms.streampartner.nl:8000/grootnieuwsradio
+  url:  http://grootnieuwsradio.streampartner.nl:8000/live
 
 - afk:  lfm
   naam: L-FM Landerd
@@ -58,7 +58,7 @@
 
 - afk:  ping
   naam: Pinguin Radio
-  url:  http://pr320.pinguinradio.com:80
+  url:  http://streams.pinguinradio.com/PinguinRadio320.mp3
 
 - afk:  r1nl
   naam: Radio 1 (Nederland)
@@ -78,7 +78,7 @@
 
 - afk:  slam
   naam: SLAM!
-  url : http://vip-icecast.538.lw.triple-it.nl:80/SLAMFM_MP3
+  url:  https://stream.slam.nl/slam_mp3
     
 - afk:  subl
   naam: Sublime FM
@@ -96,7 +96,7 @@
 
 - afk:  r1be
   naam: Radio 1 (België)
-  url : http://mp3.streampower.be/radio1-high
+  url:  http://icecast.vrtcdn.be/radio1-high.mp3
 
 - afk:  scorpio
   naam: Radio Scorpio 
@@ -104,13 +104,13 @@
  
 - afk:  stubru
   naam: Studio Brussel
-  url : http://mp3.streampower.be/stubru-high.mp3
+  url:  http://icecast.vrtcdn.be/stubru-high.mp3 
 
 ## België
 ## Franstalig
 - afk:  purefm
   naam: Pure FM
-  url:  http://purefm.ice.infomaniak.ch:80/purefm-128
+  url:  https://radios.rtbf.be/pure-64.aac
 
 ## Hongarije
 - afk:  risefm
@@ -125,10 +125,4 @@
 ## Zwitserland
 - afk:  swiss
   naam: Radio Swiss Jazz
-  url:  http://stream.srg-ssr.ch/m/rsj/aacp_96
-
-## Lokale mpd-stream
-- afk:  mpd
-  naam: Lokale MPD-server
-  url:  http://127.0.0.1:9999/mpd
-#
+  url:  http://stream.srg-ssr.ch/m/rsj/mp3_128

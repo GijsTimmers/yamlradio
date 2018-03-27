@@ -1,34 +1,37 @@
 #!/usr/bin/env python3
 
 import yamlradio
-import subprocess
+import http
+import urllib
 import sys
 import yaml
 import time
 import os
 
-print("Testing is turned off for now.")
-
-"""
 def main():
+    print("Testen of alle URL's nog online zijn.")
+    print("200 = online.")
+
     loaded_yaml = os.path.join(os.path.dirname(__file__), "./yamlradio/zenders.yml")
     
     with open(loaded_yaml, "r") as f:
         zenderdict = yaml.load(f)
-        afkortingenlijst = [combinatie["afk"] \
+        urllijst = [combinatie["url"] \
         for combinatie in zenderdict]
 
-        for afk in afkortingenlijst:
-            p = subprocess.Popen(["yamlradio", afk])
-            time.sleep(2)
-            p.terminate()
-
-
-
-        
-
+        for url in urllijst:
+            try:
+                print("{}: {}".format(url,urllib.request.urlopen(url).getcode()))
+            except urllib.error.HTTPError:
+                print("{} offline!".format(url))
+                sys.exit(1)
+            except http.client.BadStatusLine:
+                print("{} badstatusline!".format(url))
+                sys.exit(1)
+            except (TimeoutError, urllib.error.URLError):
+                print("{} timeout!".format(url))
+                sys.exit(1)
 
 if __name__ == "__main__":
     main()
-"""
 

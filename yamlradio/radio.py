@@ -49,6 +49,3 @@ class Radio(object):
         self.fifo.close()
         os.remove(self.fifopath)
         os.rmdir(self.tempdirpath)
-
-        
-        
