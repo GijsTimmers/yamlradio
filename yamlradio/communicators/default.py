@@ -26,7 +26,7 @@ class Communicator(object):
         self.toegestane_lengte_infotekst = self.BREEDTE_TERMINAL - 16
         
     def processChannelName(self, zender):
-        print("Speelt nu af: [{zender}]".format(zender=zender))
+        print("Speelt nu af: [{zender}]".format(zender=zender)[0:self.toegestane_lengte_infotekst])
         ## terminaltitel instellen
         sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
             
