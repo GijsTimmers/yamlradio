@@ -18,6 +18,8 @@ language: python
 python:
     - "3.6"
 
+sudo: required
+
 ## Command to install system dependencies
 #addons:
   #apt:
