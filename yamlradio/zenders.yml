@@ -127,3 +127,8 @@
   naam: Radio Swiss Jazz
   url:  http://stream.srg-ssr.ch/m/rsj/aacp_96
 
+## Lokale mpd-stream
+- afk:  mpd
+  naam: Lokale MPD-server
+  url:  http://127.0.0.1:9999/mpd
+#

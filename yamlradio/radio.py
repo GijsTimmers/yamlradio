@@ -18,42 +18,37 @@
 
 import subprocess               ## Om programma's uit te voeren vanuit Python
 import os                       ## Basislib
+import tempfile                 ## Voor tijdelijke mappen / bestanden
 
 class Radio(object):
     def __init__(self):
-        if os.name == "posix":
-            self.cmd = "mplayer"
-        else:
-            self.cmd = "mplayer.exe"
+        self.cmd = ["mpv", "--no-terminal"]
 
     def afspelen(self, url):
         dev_null = open(os.devnull, "w")
+
+        self.tempdirpath = tempfile.mkdtemp(prefix="yamlradio_", dir="/tmp")
+        self.fifopath = os.path.join(self.tempdirpath, "fifo")
+        os.mkfifo(self.fifopath)
+
+        self.cmd.append("--input-file={}".format(self.fifopath))
+        self.cmd.append(url)
         
         try:        
-            self.stream = subprocess.Popen([self.cmd, url], \
-            stdin=subprocess.PIPE, \
-            stdout=dev_null, \
-            stderr=dev_null, \
-            bufsize=1)
-        except OSError:
-            print("Kon geen mplayer-executable vinden in $PATH.")
-            print("Installeer deze eerst:")
-            print("Ubuntu:  sudo apt-get install mplayer2")
-            print("Arch:    sudo pacman -S mplayer")
-            print("Windows: http://sourceforge.net/projects/mplayer-win32/")
+            self.stream = subprocess.Popen(self.cmd)
 
-    def volumeUp(self):
-        self.stream.stdin.write(b"0")
-        self.stream.stdin.flush()
-        
-    def volumeDown(self):
-        self.stream.stdin.write(b"9")
-        self.stream.stdin.flush()
-        
+        except OSError:
+            print("Kon geen mpv-executable vinden in $PATH.")
+            print("Installeer deze eerst:")
+            print("Ubuntu:  sudo apt-get install mpv")
+            print("Arch:    sudo pacman -S mpv")
+
     def stoppen(self):
-        ## Stuur de toetsindruk Q naar de stream. mplayer reageert op q
-        ## door te stoppen.
-        self.stream.stdin.write(b"q")
-        self.stream.stdin.flush()
+        self.fifo = open(self.fifopath, "w")
+        self.fifo.write("quit\n")
+        self.fifo.close()
+        os.remove(self.fifopath)
+        os.rmdir(self.tempdirpath)
+
         
         

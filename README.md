@@ -15,17 +15,17 @@ A small Python script to play various radio stations from a terminal.
 
 On Ubuntu:
 
-    $ sudo apt-get install python3-pip mplayer2
+    $ sudo apt-get install python3-pip mpv
 
 On Arch:
 
-    $ sudo pacman -S python-pip mplayer
+    $ sudo pacman -S python-pip mpv
 
 After installing `pip`, use it to install `yamlradio`:
 
     $ sudo pip3 install yamlradio
 
-You don't need to mind the dependencies as they will be installed automatically.
+You don't need to mind the python dependencies as they will be installed automatically.
 
 
 ## Usage

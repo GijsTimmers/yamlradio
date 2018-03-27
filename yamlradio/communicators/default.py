@@ -22,22 +22,10 @@ class Communicator(object):
         self.oude_icy_streamtitle = ""
         self.BREEDTE_TERMINAL = 79
         
-        if os.name == "posix":
-            self.arrow_up_sign   = "↑"
-            self.arrow_down_sign = "↓"
-        
-        if os.name == "nt":
-            self.arrow_up_sign   = "\x18"
-            self.arrow_down_sign = "\x19"
-        
     def processChannelName(self, zender):
         print("Speelt nu af: [{zender}]".format(zender=zender))
-        ## Huidige radiozender weergeven als terminaltitel.
-        if os.name == "posix":
-            sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
-        elif os.name == "nt":
-            import ctypes
-            ctypes.windll.kernel32.SetConsoleTitleA(zender.encode())
+        ## terminaltitel instellen
+        sys.stdout.write("\x1b]2;{zender}\x07".format(zender=zender))
             
     def processIcy(self, icy_streamtitle):
         ## Ontvangen ICY-tekst doorgeven aan checkIfIcyIsNew() om te kijken of
@@ -48,20 +36,12 @@ class Communicator(object):
         if self.nieuwe_icy_streamtitle:
             if self.nieuwe_icy_streamtitle != self.oude_icy_streamtitle:
                 sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-                sys.stdout.write("\r" + "Info:         [{info}]".format(info=self.nieuwe_icy_streamtitle[0:64]))
+                sys.stdout.write("\r" + "Info:         [{info}]".
+                        format(info=self.nieuwe_icy_streamtitle[0:64]))
         else:
             sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-            sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".format(info=self.nieuwe_icy_streamtitle))
-    
-    def processVolumeUp(self):
-        sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_up_sign))
-    
-    def processVolumeDown(self):
-        sys.stdout.write("\r" + " " * self.BREEDTE_TERMINAL)
-        sys.stdout.write("\r" + "Info:         [Volume {arrow}]".format(arrow = self.arrow_down_sign))
+            sys.stdout.write("\r" + "Info:         [Geen informatie beschikbaar]".
+                    format(info=self.nieuwe_icy_streamtitle))
     
     def restoreTerminalTitle(self):
-        ## Terminaltitel opnieuw instellen op "Terminal"
-        if os.name == "posix":
-            sys.stdout.write("\x1b]2;Terminal\x07")
+        sys.stdout.write("\x1b]2;Terminal\x07")

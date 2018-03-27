@@ -49,22 +49,13 @@ def main(*afk):
             kp.getKeypress(q)        
             if q.empty():
                 co.processIcy(ip.icy_streamtitle)
-                #print(rd.stream.stdout.readline())
                 time.sleep(0.1)
             else:
                 intent = q.get()
                 if intent == "stop":
+                    print("")
+                    cursor.show()
+                    ip.stop()
+                    rd.stoppen()
+                    co.restoreTerminalTitle()
                     break
-                elif intent == "volumeUp":
-                    co.processVolumeUp()
-                    rd.volumeUp()
-                    
-                elif intent == "volumeDown":
-                    co.processVolumeDown()
-                    rd.volumeDown()
-                    
-    ip.stop()
-    rd.stoppen()
-    co.restoreTerminalTitle()
-    print("")
-    cursor.show()

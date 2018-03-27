@@ -15,6 +15,11 @@
 ## CA 94042, USA.
 
 import os
+import tty                      ## Necessary stuff for logging keypresses
+import sys                      ## Necessary stuff for logging keypresses
+import select                   ## Necessary stuff for logging keypresses
+import termios                  ## Necessary stuff for logging keypresses
+
    
 class UnixEnvironment(object):
     def __enter__(self):
@@ -126,16 +131,5 @@ class WindowsKeypress(UnixKeypress):
             else:
                 pass
 
-
-if os.name == "posix":
-    import tty                      ## Necessary stuff for logging keypresses
-    import sys                      ## Necessary stuff for logging keypresses
-    import select                   ## Necessary stuff for logging keypresses
-    import termios                  ## Necessary stuff for logging keypresses
-    Environment = UnixEnvironment
-    Keypress = UnixKeypress
-
-elif os.name == "nt":
-    import msvcrt
-    Environment = WindowsEnvironment
-    Keypress = WindowsKeypress
+Environment = UnixEnvironment
+Keypress = UnixKeypress
