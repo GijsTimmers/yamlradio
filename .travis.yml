@@ -19,7 +19,7 @@ sudo: false
 
 ## Setting up the correct language
 language: python
-python: "3.4"
+python: "3.6"
 
 ## Command to install system dependencies
 addons:
@@ -30,7 +30,8 @@ addons:
 
 ## Command to install pip dependencies
 install: 
-    - pip3 install argparse argcomplete pyYAML cursor icyparser
+    - pip install -r requirements.txt
+    - python setup.py install
 
 ## Actual script
 script: ./test.py
