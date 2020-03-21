@@ -34,7 +34,7 @@ class Parser(object):
             loaded_yaml = DEFAULT_YAML
         
         with open(loaded_yaml, "r") as f:
-            self.zenderdict = yaml.load(f)
+            self.zenderdict = yaml.load(f, Loader=yaml.FullLoader)
         
         ## Afkortingenlijsten vullen met afkortingen en evt. namen
         self.afkortingenlijst = [combinatie["afk"] \
