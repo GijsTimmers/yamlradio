@@ -22,7 +22,7 @@ import tempfile                 ## Voor tijdelijke mappen / bestanden
 
 class Radio(object):
     def __init__(self):
-        self.cmd = ["mpv", "--no-terminal", "--no-ytdl", "--no-cache"]
+        self.cmd = ["mpv", "--no-terminal", "--no-ytdl", "--no-cache", "--no-video"]
 
     def afspelen(self, url):
         dev_null = open(os.devnull, "w")
